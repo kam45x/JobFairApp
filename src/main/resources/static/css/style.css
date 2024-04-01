@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+.company {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    align-items: center; /* Wyśrodkowanie w pionie */
+}
+.company img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 20px;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+.company-details {
+    flex: 1; /* Elastyczny kontener dla szczegółów firmy */
+}
+.company-details h2 {
+    margin-top: 0; /* Usunięcie domyślnego marginesu dla nagłówka */
+    text-align: center; /* Wyśrodkowanie tekstu */
+}
+.company-details p {
+    text-align: center; /* Wyśrodkowanie tekstu */
+}
+.company-details .specialties {
+    /*margin-top: 30px; !* Dodany margines powyżej tabelki *!*/
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    border: 1px solid #ccc; /* Dodane obramowanie */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    padding: 20px; /* Dodane wewnętrzne odstępy */
+    /*margin-bottom: 20px;*/
+}
+.company-details .specialties div {
+    border: 1px solid #ccc;
+}
+.company-details .specialties p {
+    margin: 0; /* Usunięcie domyślnego marginesu dla paragrafu */
+}
+.btn-container {
+    text-align: center; /* Wyśrodkowanie przycisku */
+    margin-top: 30px; /* Dodany margines powyżej przycisku */
+}
+.btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #555;
+}
+/* Stylowanie mapy targów pracy */
+.map {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    margin-top: 20px;
+}
+.hallway {
+    grid-column: span 5;
+}
+.booth {
+    background-color: #ddd; /* zmieniony kolor stoiska na szary */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.booth:hover {
+    background-color: #ccc; /* zmieniony kolor podczas najechania na stoisko */
+}
+.booth:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #88829A;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}

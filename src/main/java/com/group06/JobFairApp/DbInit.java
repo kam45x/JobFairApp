@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 public class DbInit implements CommandLineRunner {
 
-    private int numberOfBooths = 15;
+    private final int numberOfBooths = 15;
     private final CompanyRepository companyRepository;
     private final BoothRepository boothRepository;
 

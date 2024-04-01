@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Targi pracy</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<header>
+    <h1>Targi pracy</h1>
+</header>
+<div class="container">
+    <h2 class="section-title">Mapa targów</h2>
+    <div class="map">
+        <div class="booth" th:each="booth : ${booths}" th:text="${booth.id}" th:attr="data-tooltip=${booth.companyName}"></div>
+    </div>
+</div>
+<div class="container">
+    <h2 class="section-title">Lista firm</h2>
+    <div class="company" th:each="company : ${companies}">
+        <div class="company-details">
+            <h2 th:text="${company.name}"></h2>
+            <img th:src="@{${company.imgUrl}}" class="center">
+            <p th:text="${company.description}"></p>
+            <div class="specialties">
+                <p>Obszary działania</p>
+                <p th:text="${company.jobTopics}"></p>
+            </div>
+            <div class="specialties">
+                <p>Numer stoiska</p>
+                <p th:text="${company.getBoothId}"></p>
+            </div>
+            <div class="btn-container">
+                <a th:href="${company.websiteUrl}" class="btn">Więcej</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

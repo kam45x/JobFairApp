@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${page_company.get().name}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+<div class="main_cointainer">
+    <h2 class="section-title1">Kogo szukamy?</h2>
+    <div class="container_who1" th:text="${page_company.get().getWhoLookingFor}"></div>
+    <div class="button_cont">
+        <a th:href="@{${page_company.get().websiteUrl}}" class="btn">Więcej</a>
+    </div>
+
+</div>
+<div class="container_back">
+    <div class="background" th:style="'background-image: url(' + ${page_company.get().imgUrl} + ');'"></div>
+    </div>
+<div class="rest_page_cointainer">
+    <h2 class="section-title1" th:text="'Dlaczego ' + ${page_company.get().name} + '?'"></h2>
+    <div class="container_who2">
+        <div class="text_in_main" th:text="${page_company.get().longDescription}"></div>
+
+
+    </div>
+</div>
+</body>
+</html>

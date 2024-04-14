@@ -122,3 +122,114 @@ header {
     padding: 10px;
     border-radius: 5px;
 }
+
+/* Style dla strony firmy */
+.main_cointainer {
+    position: fixed;
+    width: 25%;
+    margin: auto;
+    padding: 100px;
+    margin-left: 62%;
+
+}
+.rest_page_cointainer {
+    position: absolute;
+    width: 53%;
+    padding: 0px;
+    margin-left: 200px;
+    margin-top: -40px;
+
+}
+
+.container_back {
+    position: relative;
+    width: 1200px; /* Szerokość kontenera */
+    height: 300px; /* Wysokość kontenera */
+    margin-top: 0px; /* Centralizuje kontener na stronie */
+    margin-left: 0px;
+    border-radius: 5px;
+    overflow: hidden; /* Ukrywa elementy, które wykraczają poza kontener */
+
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Rozciąga obraz na całą szerokość kontenera */
+    height: 100%; /* Rozciąga obraz na całą wysokość kontenera */
+    background-size: cover; /* Dopasowuje obrazek do wielkości kontenera */
+    background-position: center; /* Ustawia pozycję obrazka na środku */
+    z-index: -1; /* Ustawia obrazek jako element tła */
+    /* opacity: 0.9; */
+
+}
+.container_who1 {
+    width: 100;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 457px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+
+}
+.container_who2 {
+    width: 100;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 500px;
+    overflow-wrap: break-word;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.section-title1 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #3309c9;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.text_in_main {
+    width: 70%;
+    background-color:  #ffffff;
+    overflow: hidden;
+    margin-left: 50px;
+}
+
+.button_cont {
+    width: 190px; /* Szerokość kontenera */
+    padding: 0px; /* Wewnętrzny odstęp dla zawartości (opcjonalny) */
+    background-color: #ffffff; /* Kolor tła kontenera */
+    position: absolute;
+    top: 600px;
+    left: 220px;
+
+}
+
+ /* Stylizacja przycisku */
+ .button_cont button {
+    background-color: #073288; /* Kolor tła przycisku */
+    border: none; /* Brak obramowania */
+    color: white; /* Kolor tekstu */
+    padding: 10px 20px; /* Wewnętrzny odstęp przycisku */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    text-decoration: none; /* Brak podkreślenia */
+    display: inline-block; /* Występowanie jako blok, aby zmieścić wewnętrzne marginesy */
+    font-size: 16px; /* Rozmiar czcionki */
+    cursor: pointer; /* Kursor wskazujący */
+    border-radius: 40px; /* Zaokrąglenie rogów */
+    transition: background-color 0.1s; /* Płynne przejście koloru tła */
+
+}
+
+/* Dodatkowy styl po najechaniu na przycisk */
+.button_cont button:hover {
+    background-color: #5363bf; /* Inny kolor tła po najechaniu */
+}

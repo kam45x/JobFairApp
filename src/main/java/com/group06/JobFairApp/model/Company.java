@@ -18,6 +18,7 @@ public class Company {
     @GeneratedValue
     private Long id;
     private String name;
+    private String logoUrl;
     private String imgUrl;
     private String jobTopics;
     private int boothId;
@@ -26,12 +27,21 @@ public class Company {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    public Company(String name, String imgUrl, String jobTopics, int boothId, String websiteUrl, String description) {
+    @Column(columnDefinition = "TEXT")
+    private String whoLookingFor;
+
+    @Column(columnDefinition = "TEXT")
+    private String longDescription;
+
+    public Company(String name, String logoUrl, String imgUrl, String jobTopics, int boothId, String websiteUrl, String description, String who_looking_for, String longDescription) {
         this.name = name;
+        this.logoUrl = logoUrl;
         this.imgUrl = imgUrl;
         this.jobTopics = jobTopics;
         this.boothId = boothId;
         this.websiteUrl = websiteUrl;
         this.description = description;
+        this.whoLookingFor = who_looking_for;
+        this.longDescription = longDescription;
     }
 }

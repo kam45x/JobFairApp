@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj nową firmę do targów</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Dodaj nową firmę</h2>
+    <form th:action="@{/admin}" method="post">
+        <div class="form-group">
+            <label>Nazwa firmy:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Adres URL logo:</label>
+            <input type="text" name="logoUrl" required>
+        </div>
+        <div class="form-group">
+            <label>Adres URL dodatkowego zdjęcia:</label>
+            <input type="text" name="imgUrl" required>
+        </div>
+        <div class="form-group">
+            <label>Obszary działania i stanowisk:</label>
+            <input type="text" name="jobTopics" required>
+        </div>
+        <div class="form-group">
+            <label>Numer stanowiska:</label>
+            <input type="number" step="1" name="boothId" required>
+        </div>
+        <div class="form-group">
+            <label>Adres strony internetowej:</label>
+            <input type="text" name="websiteUrl" required>
+        </div>
+        <div class="form-group">
+            <label>Krótki opis firmy:</label>
+            <input type="text" name="description" required>
+        </div>
+        <div class="form-group">
+            <label>Rozbudowany opis firmy:</label>
+            <input type="text" name="longDescription" required>
+        </div>
+        <div class="form-group">
+            <label>Kogo szuka firma:</label>
+            <input type="text" name="whoLookingFor" required>
+        </div>
+        <button type="submit">Dodaj firmę</button>
+    </form>
+</div>
+
+</body>
+</html>

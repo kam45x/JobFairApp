@@ -21,7 +21,7 @@
     <div class="company" th:each="company : ${companies}">
         <div class="company-details">
             <h2 th:text="${company.name}"></h2>
-            <img th:src="@{${company.imgUrl}}" class="center">
+            <img th:src="@{${company.getLogoUrl}}" class="center">
             <p th:text="${company.description}"></p>
             <div class="specialties">
                 <p>Obszary działania</p>
@@ -32,7 +32,7 @@
                 <p th:text="${company.getBoothId}"></p>
             </div>
             <div class="btn-container">
-                <a th:href="${company.websiteUrl}" class="btn">Więcej</a>
+                <a th:href="@{'/company/page/' + ${company.id}}" class="btn">Więcej</a>
             </div>
         </div>
     </div>

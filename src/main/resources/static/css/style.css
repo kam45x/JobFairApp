@@ -296,6 +296,7 @@ header {
 }
 
 #floatingButton {
+
     position: fixed;
     top: 40px;
     right: 20px;

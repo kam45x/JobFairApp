@@ -135,7 +135,7 @@ header {
 .rest_page_cointainer {
     position: absolute;
     width: 53%;
-    padding: 0px;
+    padding: 0;
     margin-left: 200px;
     margin-top: -40px;
 
@@ -145,8 +145,8 @@ header {
     position: relative;
     width: 1200px; /* Szerokość kontenera */
     height: 300px; /* Wysokość kontenera */
-    margin-top: 0px; /* Centralizuje kontener na stronie */
-    margin-left: 0px;
+    margin-top: 0; /* Centralizuje kontener na stronie */
+    margin-left: 0;
     border-radius: 5px;
     overflow: hidden; /* Ukrywa elementy, które wykraczają poza kontener */
 
@@ -165,7 +165,7 @@ header {
 
 }
 .container_who1 {
-    width: 100;
+    width: 100%;
     padding: 25px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -176,7 +176,7 @@ header {
 
 }
 .container_who2 {
-    width: 100;
+    width: 100%;
     padding: 25px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -205,7 +205,7 @@ header {
 
 .button_cont {
     width: 190px; /* Szerokość kontenera */
-    padding: 0px; /* Wewnętrzny odstęp dla zawartości (opcjonalny) */
+    padding: 0; /* Wewnętrzny odstęp dla zawartości (opcjonalny) */
     background-color: #ffffff; /* Kolor tła kontenera */
     position: absolute;
     top: 600px;
@@ -232,4 +232,66 @@ header {
 /* Dodatkowy styl po najechaniu na przycisk */
 .button_cont button:hover {
     background-color: #5363bf; /* Inny kolor tła po najechaniu */
+}
+
+/* Style dla harmonogramu */
+.main_cointainer1 {
+    position: relative;
+    width: 90%;
+    padding: 50px;
+    margin-right: 10%;
+    height: 1000px;
+
+
+}
+.section-title2 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #7206a4;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn1 {
+    background-color: #49024e;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button_cont1 {
+    width: 190px; /* Szerokość kontenera */
+    padding: 0; /* Wewnętrzny odstęp dla zawartości (opcjonalny) */
+    background-color: #ffffff; /* Kolor tła kontenera */
+    position: fixed;
+    top: 600px;
+    left: 700px;
+
+}
+
+.workshop {
+    position:relative;
+    width: 90%;
+    padding: 50px;
+    margin-right: 10%;
+    font-size: 16px;
+
+}
+
+.container_plan {
+    width: 100%;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 1000px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+
 }

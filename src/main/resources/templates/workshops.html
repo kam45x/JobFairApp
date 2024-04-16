@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${Warsztaty}"></title>
+    <link rel="stylesheet" type="text/css"  href="/css/style.css">
+</head>
+<body>
+
+<div class="main_cointainer1">
+    <h2 class="section-title2">Plan warsztatów</h2>
+    <div class="container_plan">
+        <div class="workshop">
+            <h2>Warsztat 1: Tworzenie stron internetowych</h2>
+            <p><strong>Data:</strong> 20 kwietnia 2024</p>
+            <p><strong>Godzina:</strong> 10:00 - 12:00</p>
+            <p><strong>Miejsce:</strong> Sala konferencyjna A</p>
+            <p><strong>Prowadzący:</strong> Jan Kowalski</p>
+        </div>
+
+        <div class="workshop">
+            <h2>Warsztat 2: Wprowadzenie do programowania</h2>
+            <p><strong>Data:</strong> 21 kwietnia 2024</p>
+            <p><strong>Godzina:</strong> 13:00 - 15:00</p>
+            <p><strong>Miejsce:</strong> Sala konferencyjna B</p>
+            <p><strong>Prowadzący:</strong> Anna Nowak</p>
+        </div>
+
+        <div class="workshop">
+            <h2>Warsztat 3: Projektowanie graficzne</h2>
+            <p><strong>Data:</strong> 22 kwietnia 2024</p>
+            <p><strong>Godzina:</strong> 09:00 - 11:00</p>
+            <p><strong>Miejsce:</strong> Sala konferencyjna C</p>
+            <p><strong>Prowadzący:</strong> Michał Wiśniewski</p>
+        </div>
+
+    </div>
+    <div class="button_cont1">
+        <a th:href=""
+        class="btn1">Więcej</a>
+    </div>
+
+
+</div>
+
+</body>
+</html>

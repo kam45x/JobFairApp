@@ -277,10 +277,11 @@ header {
 
 .workshop {
     position:relative;
-    width: 90%;
-    padding: 50px;
+    width: 100%;
+    padding: 0;
     margin-right: 10%;
-    font-size: 16px;
+    font-size: 13px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -292,6 +293,22 @@ header {
     overflow: hidden;
     height: 1000px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-
-
 }
+
+#floatingButton {
+    position: fixed;
+    top: 40px;
+    right: 20px;
+    z-index: 999; /* Ustawienie z-index na wysoką wartość, aby przycisk był na wierzchu */
+    background-color: #7e6dd7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content {
+    padding-bottom: 60px; /* Ustal odpowiedni margines dolny dla zawartości, aby uniknąć zakrycia przez przycisk */
+}
+

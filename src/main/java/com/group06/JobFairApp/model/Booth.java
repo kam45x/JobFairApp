@@ -7,24 +7,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor // Adnotacja Lombok tworząca domyślny konstruktor bezargumentowy
-@Getter // Adnotacja Lombok tworząca getter-y dla wszystkich pól klasy
-@Setter // Adnotacja Lombok tworząca setter-y dla wszystkich pól klasy
-@Entity // Adnotacja oznaczająca, że klasa jest encją JPA
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
 public class Booth {
 
-    @Id // Oznaczenie pola jako klucz główny w encji
-    @GeneratedValue // Oznaczenie, że wartość tego pola będzie generowana automatycznie
-    private int id; // identyfikator stoiska
-    private String companyName; // nazwa firmy
+    @Id
+    @GeneratedValue
+    private int id;
+    private String companyName;
 
-    // Konstruktor dla stoiska obsadzonego daną firmą
     public Booth(int boothId, String companyName) {
         this.companyName = companyName;
         this.id = boothId;
     }
 
-    // Konstruktor dla stanowiska pustego
     public Booth(int boothId) {
         this.companyName = "Puste stoisko";
         this.id = boothId;

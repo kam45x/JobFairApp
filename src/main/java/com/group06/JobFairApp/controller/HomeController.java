@@ -13,18 +13,15 @@ public class HomeController {
     private final CompanyRepository companyRepository;
     private final BoothRepository boothRepository;
 
-    // Konstruktor kontrolera HomeController
     @Autowired
     public HomeController(CompanyRepository companyRepository, BoothRepository boothRepository) {
         this.companyRepository = companyRepository;
         this.boothRepository = boothRepository;
     }
 
-    // Metoda obsługująca żądanie GET dla ścieżki głównej "/"
     @GetMapping("/")
     public String home(Model model)
     {
-        // Dodanie atrybutów "companies" i "booths" do modelu, aby były dostępne w widoku
         model.addAttribute("companies", companyRepository.findAll());
         model.addAttribute("booths", boothRepository.findAll());
         return "home";

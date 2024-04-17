@@ -11,3 +11,6 @@
 * Stworzenie strony ze szczegółami firmy w HTML i CSS.
 * Stworzenie wstępnej wersji widoku planu warsztatów targów pracy.
 * Drobne poprawki na stronie głównej.
+
+### Piotr Sienkiewicz
+* Drobne poprawki 

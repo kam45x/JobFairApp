@@ -14,16 +14,20 @@ public class CompanyPageController {
 
     private final CompanyRepository companyRepository;
 
+    // Konstruktor kontrolera CompanyPageController
     @Autowired
     public CompanyPageController(CompanyRepository companyRepository)
     {
         this.companyRepository = companyRepository;
     }
 
+    // Metoda obsługująca żądanie GET dla ścieżki "/company/page/{id}"
     @GetMapping("/page/{id}")
     public String showCompanyPage(@PathVariable("id") Long id, Model model)
     {
+        // Dodanie atrybutu "page_company" do modelu, aby był dostępny w widoku
         model.addAttribute("page_company", companyRepository.findById(id));
+        // Zwrócenie nazwy widoku "company_page", który zostanie wyrenderowany przez silnik szablonów
         return "company_page";
     }
 }

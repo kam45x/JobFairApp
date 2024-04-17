@@ -8,14 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@Entity
+@NoArgsConstructor // Adnotacja Lombok tworząca domyślny konstruktor bezargumentowy
+@Getter // Adnotacja Lombok tworząca getter-y dla wszystkich pól klasy
+@Setter // Adnotacja Lombok tworząca setter-y dla wszystkich pól klasy
+@Entity // Adnotacja oznaczająca, że klasa jest encją JPA
 public class Company {
 
-    @Id
-    @GeneratedValue
+    @Id // Oznaczenie pola jako klucz główny w encji
+    @GeneratedValue // Wartość klucza jest generowana domyślnie
     private Long id;
     private String name;
     private String logoUrl;
@@ -24,7 +24,7 @@ public class Company {
     private int boothId;
     private String websiteUrl;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT") // Oznaczenie, że pole będzie mapowane na typ TEXT w bazie danych
     private String description;
 
     @Column(columnDefinition = "TEXT")
@@ -33,7 +33,9 @@ public class Company {
     @Column(columnDefinition = "TEXT")
     private String longDescription;
 
-    public Company(String name, String logoUrl, String imgUrl, String jobTopics, int boothId, String websiteUrl, String description, String who_looking_for, String longDescription) {
+    public Company(String name, String logoUrl, String imgUrl, String jobTopics,
+                   int boothId, String websiteUrl, String description,
+                   String who_looking_for, String longDescription) {
         this.name = name;
         this.logoUrl = logoUrl;
         this.imgUrl = imgUrl;

@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/workshops")
 public class WorkshopsController {
 
+    // Konstruktor kontrolera WorkshopsController
     public WorkshopsController()
     {
     }
 
+    // Metoda obsługująca żądanie GET dla ścieżki "/workshops/page"
     @GetMapping("/page")
     public String showWorkshops(Model model)
     {
+        // Zwraca nazwę widoku "workshops", który zostanie wyrenderowany przez silnik szablonów
         return "workshops";
     }
 }

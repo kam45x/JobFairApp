@@ -16,6 +16,38 @@
 
 <div class="container">
     <h2 class="section-title">Mapa targów</h2>
+    <button id="toggleFiltersButton" onclick="toggleFilters()">Wybierz kierunek studiów</button>
+    <div class="filters" id="filtersContainer" style="display: none;">
+        <!-- Filtry -->
+        <div>
+            <input type="checkbox" id="filter1" name="filter1">
+            <label for="filter1">Automatyka i Robotyka</label>
+        </div>
+        <div>
+            <input type="checkbox" id="filter2" name="filter2">
+            <label for="filter2">Elektronika</label>
+        </div>
+        <div>
+            <input type="checkbox" id="filter3" name="filter3">
+            <label for="filter3">Informatyka</label>
+        </div>
+        <div>
+            <input type="checkbox" id="filter4" name="filter4">
+            <label for="filter4">Inżynieria Internetu Rzeczy</label>
+        </div>
+        <div>
+            <input type="checkbox" id="filter5" name="filter5">
+            <label for="filter5">Telekomunikacja</label>
+        </div>
+        <div>
+            <input type="checkbox" id="filter6" name="filter6">
+            <label for="filter6">Zarządzanie</label>
+        </div>
+
+    <button id="applyFilters">Zastosuj filtry</button>
+    </div>
+
+
     <div class="map">
         <div class="booth" th:each="booth : ${booths}" th:text="${booth.id}" th:attr="data-tooltip=${booth.companyName}"></div>
     </div>
@@ -41,6 +73,21 @@
         </div>
     </div>
 </div>
+<script>
+    function toggleFilters() {
+        var filtersContainer = document.getElementById("filtersContainer");
+        if (filtersContainer.style.display === "none") {
+            filtersContainer.style.display = "block";
+        } else {
+            filtersContainer.style.display = "none";
+        }
+    }
+
+    document.getElementById("applyFilters").addEventListener("click", function() {
+        var filtersContainer = document.getElementById("filtersContainer");
+        filtersContainer.style.display = "none";
+    });
+</script>
 
 
 </body>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarejestruj się</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://cdn.pixabay.com/photo/2017/10/05/08/20/technology-2818664_1280.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin: 0;
+}
+
+h2 {
+    margin-left: 17%;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    border-radius: 3px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    margin-left: 20%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"], /* Dodajemy styl dla input[type="password"] */
+button {
+    width: 65%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
+button {
+    background-color: rgb(0, 16, 104);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 30%;
+    width: 40%;
+    border-radius: 5px; /* Dodaj zaokrąglone rogi */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dodaj cień */
+    transition: background-color 0.3s ease, filter 0.3s ease; /* Dodaj efekt przejścia dla zmiany koloru tła i jasności */
+}
+
+button:hover {
+    filter: brightness(1.5); /* Zwiększ jasność przycisku przy najechaniu */
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Podaj dane rejestracji:</h2>
+    <form th:action="@{/admin}" method="post">
+        <div class="form-group">
+            <label>Imię:</label>
+            <input type="text" name="logoUrl" required>
+        </div>
+        <div class="form-group">
+            <label>Nazwisko:</label>
+            <input type="text" name="logoUrl" required>
+        </div>
+        <div class="form-group">
+            <label>Numer telefonu:</label>
+            <input type="text" name="logoUrl" required>
+        </div>
+        <div class="form-group">
+            <label>Adres e-mail:</label>
+            <input type="text" name="logoUrl" required>
+        </div>
+
+        <div class="form-group">
+            <label>Hasło:</label>
+            <input type="password"  name="name" required>
+
+        </div>
+
+
+
+
+        <button type="submit">Zarejestruj się</button>
+    </form>
+</div>
+
+</body>
+</html>

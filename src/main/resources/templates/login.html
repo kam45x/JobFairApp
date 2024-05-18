@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaloguj się</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://media.istockphoto.com/id/961452318/pl/zdj%C4%99cie/schemat-in%C5%BCynierii-schemat-papieru-kre%C5%9Blenia-projektu-szkic-architektury-szczeg%C3%B3%C5%82y-rysunku.jpg?s=612x612&w=0&k=20&c=9dyrUSV40aGEXBj-PSUAYGXs05zTCqr4pJ1WBxwnX14=');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin: 0;
+}
+
+h2 {
+    margin-left: 17%;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border-radius: 3px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    margin-left: 20%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"], /* Dodajemy styl dla input[type="password"] */
+button {
+    width: 65%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
+button {
+    background-color: rgb(246, 102, 0);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 30%;
+    width: 40%;
+    transition: background-color 0.3s ease, filter 0.3s ease; /* Dodaj efekt przejścia dla zmiany koloru tła i jasności */
+}
+
+button:hover {
+    filter: brightness(1.5); /* Zwiększ jasność przycisku przy najechaniu */
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Podaj dane logowania:</h2>
+    <form th:action="@{/admin}" method="post">
+        <div class="form-group">
+            <label>Nazwa użytkownika:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Hasło:</label>
+            <input type="password" name="password" required>
+        </div>
+
+
+
+        <button type="submit">Zaloguj się</button>
+    </form>
+</div>
+
+</body>
+</html>

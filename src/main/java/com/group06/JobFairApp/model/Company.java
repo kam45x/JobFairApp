@@ -1,12 +1,12 @@
 package com.group06.JobFairApp.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serial;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -45,5 +45,24 @@ public class Company {
         this.description = description;
         this.whoLookingFor = who_looking_for;
         this.longDescription = longDescription;
+    }
+
+    public boolean matchesJobTopics(List<String> jobTopics) {
+        if (jobTopics == null)
+        {
+            return false;
+        }
+
+        String[] companyjobTopics = this.jobTopics.split(", ");
+
+        for (String topic : companyjobTopics)
+        {
+            if (jobTopics.contains(topic))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

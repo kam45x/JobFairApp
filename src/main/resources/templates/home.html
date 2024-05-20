@@ -22,7 +22,38 @@
 </div>
 <div class="container">
     <h2 class="section-title">Lista firm</h2>
-    <div class="company" th:each="company : ${companies}">
+    <button id="toggleFiltersButton" onclick="toggleFilters()">Wybierz kierunek studiów</button>
+    <div class="filters" id="filtersContainer" style="display: none;">
+        <form th:action="@{/applyFilters}" th:object="${filterForm}" method="post">
+            <!-- Filtry -->
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="Automatyka" id="filter1" name="filter1">
+                <label for="filter1">Automatyka</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="Robotyka" id="filter2" name="filter2">
+                <label for="filter2">Robotyka</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="Informatyka" id="filter3" name="filter3">
+                <label for="filter3">Informatyka</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="Inżynieria Internetu Rzeczy" id="filter4" name="filter4">
+                <label for="filter4">Inżynieria Internetu Rzeczy</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="Telekomunikacja" id="filter5" name="filter5">
+                <label for="filter5">Telekomunikacja</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="Zarządzanie" id="filter6" name="filter6">
+                <label for="filter6">Zarządzanie</label>
+            </div>
+            <button type="submit" id="applyFilters">Zastosuj filtry</button>
+        </form>
+    </div>
+    <div class="company" th:each="company : ${companies}" th:if="${company.matchesJobTopics(selectedFilters)}">
         <div class="company-details">
             <h2 th:text="${company.name}"></h2>
             <img th:src="@{${company.getLogoUrl}}" class="center">
@@ -41,6 +72,21 @@
         </div>
     </div>
 </div>
+<script>
+    function toggleFilters() {
+        var filtersContainer = document.getElementById("filtersContainer");
+        if (filtersContainer.style.display === "none") {
+            filtersContainer.style.display = "block";
+        } else {
+            filtersContainer.style.display = "none";
+        }
+    }
+
+    document.getElementById("applyFilters").addEventListener("click", function() {
+        var filtersContainer = document.getElementById("filtersContainer");
+        filtersContainer.style.display = "none";
+    });
+</script>
 
 
 </body>

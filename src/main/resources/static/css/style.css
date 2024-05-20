@@ -85,6 +85,7 @@ header {
     grid-template-columns: repeat(5, 1fr);
     gap: 40px;
     margin-top: 20px;
+
 }
 .hallway {
     grid-column: span 5;
@@ -114,6 +115,8 @@ header {
     font-size: 12px;
     white-space: nowrap;
 }
+
+
 .section-title {
     text-align: center;
     margin-bottom: 20px;
@@ -313,3 +316,60 @@ header {
     padding-bottom: 60px; /* Ustal odpowiedni margines dolny dla zawartości, aby uniknąć zakrycia przez przycisk */
 }
 
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-header {
+    cursor: pointer;
+    user-select: none;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 kolumn */
+    grid-gap: 10px;
+}
+
+.filter-grid div {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.filter-grid input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+.result-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+.filters {
+
+    margin-top: 20px;
+
+}
+#toggleFiltersButton {
+    background-color: #4CAF50; /* Kolor tła */
+    color: white; /* Kolor tekstu */
+    padding: 10px 20px; /* Wielkość wypełnienia */
+    border: none; /* Brak obramowania */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    cursor: pointer; /* Zmień kształt kursora na wskaźnik */
+    font-size: 16px; /* Rozmiar czcionki */
+}
+
+/* Styl przy najechaniu na przycisk */
+#toggleFiltersButton:hover {
+    background-color: #45a049; /* Ciemniejszy kolor tła */
+}

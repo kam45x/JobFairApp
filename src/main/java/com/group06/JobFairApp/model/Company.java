@@ -48,17 +48,14 @@ public class Company {
     }
 
     public boolean matchesJobTopics(List<String> jobTopics) {
-        if (jobTopics == null)
-        {
+        if (jobTopics == null) {
             return false;
         }
 
         String[] companyjobTopics = this.jobTopics.split(", ");
 
-        for (String topic : companyjobTopics)
-        {
-            if (jobTopics.contains(topic))
-            {
+        for (String topic : companyjobTopics) {
+            if (jobTopics.contains(topic)) {
                 return true;
             }
         }

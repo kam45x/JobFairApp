@@ -40,11 +40,18 @@ public class DbInit implements CommandLineRunner {
         for (int i = 0; i < numberOfBooths; i++) {
             booths.add(new Booth(i + 1));
         }
+
+        // Add companies to repository without duplicates
+        List<Company> existingCompanies = companyRepository.findAll();
+        List<Company> newCompanies = new ArrayList<>();
         for (Company company : companies) {
-            booths.get(company.getBoothId() - 1).setCompanyName(company.getName());
+            if (existingCompanies.stream().noneMatch(existingCompany -> existingCompany.getName().equals(company.getName()))) {
+                booths.get(company.getBoothId() - 1).setCompanyName(company.getName());
+                newCompanies.add(company);
+            }
         }
 
-        companyRepository.saveAll(companies);
         boothRepository.saveAll(booths);
+        companyRepository.saveAll(newCompanies);
     }
 }

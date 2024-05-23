@@ -41,4 +41,14 @@ public class HomeController {
         this.filterForm = filterForm;
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/signin")
+    public String showSignUpPage() {
+        return "signin";
+    }
 }

@@ -17,7 +17,8 @@
 <div class="container">
     <h2 class="section-title">Mapa targów</h2>
     <div class="map">
-        <div class="booth" th:each="booth : ${booths}" th:text="${booth.id}" th:attr="data-tooltip=${booth.companyName}"></div>
+        <div class="booth" th:each="booth : ${booths}" th:text="${booth.boothNumber}" th:attr="data-tooltip=${booth.companyName}"
+             th:style="'background-color:' + ${booth.color}"></div>
     </div>
 </div>
 <div class="container">
@@ -64,7 +65,7 @@
             </div>
             <div class="specialties">
                 <p>Numer stoiska</p>
-                <p th:text="${company.getBoothId}"></p>
+                <p th:text="${company.getBoothNumber()}"></p>
             </div>
             <div class="btn-container">
                 <a th:href="@{'/company/page/' + ${company.id}}" class="btn">Więcej</a>

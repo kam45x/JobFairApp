@@ -15,16 +15,33 @@ public class Booth {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
+    private int boothNumber;
     private String companyName;
+    private String color;
 
-    public Booth(int boothId, String companyName) {
+    public Booth(int boothNumber, String companyName, String color) {
+        this.boothNumber = boothNumber;
         this.companyName = companyName;
-        this.id = boothId;
+        this.color = color;
     }
 
-    public Booth(int boothId) {
-        this.companyName = "Puste stoisko";
-        this.id = boothId;
+    public Booth(int boothNumber, String companyName) {
+        this(boothNumber, companyName, "#ddd");
+    }
+
+    public Booth(int boothNumber) {
+        this(boothNumber, "Puste stoisko", "#ddd");
+    }
+
+    public void setColorByName(String colorName) {
+        switch (colorName) {
+            case "green" :
+                this.color = "#008000";
+                break;
+            case "gray":
+                this.color = "#ddd";
+                break;
+        }
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 public class DbInit implements CommandLineRunner {
@@ -40,11 +41,27 @@ public class DbInit implements CommandLineRunner {
         for (int i = 0; i < numberOfBooths; i++) {
             booths.add(new Booth(i + 1));
         }
+
+        // Add companies to repository without duplicates
+        List<Company> existingCompanies = companyRepository.findAll();
+        List<Company> newCompanies = new ArrayList<>();
         for (Company company : companies) {
-            booths.get(company.getBoothId() - 1).setCompanyName(company.getName());
+            if (existingCompanies.stream().noneMatch(existingCompany -> existingCompany.getName().equals(company.getName()))) {
+                booths.get(company.getBoothNumber() - 1).setCompanyName(company.getName());
+                newCompanies.add(company);
+            }
         }
 
-        companyRepository.saveAll(companies);
-        boothRepository.saveAll(booths);
+        // Add booths to repository without duplicates
+        List<Booth> existingBooths = boothRepository.findAll();
+        List<Booth> newBooths = new ArrayList<>();
+        for (Booth booth : booths) {
+            if (existingBooths.stream().noneMatch(existingBooth -> existingBooth.getBoothNumber() == booth.getBoothNumber())) {
+                newBooths.add(booth);
+            }
+        }
+
+        boothRepository.saveAll(newBooths);
+        companyRepository.saveAll(newCompanies);
     }
 }

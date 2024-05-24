@@ -16,7 +16,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @PostMapping("/signin")
     public String signUpUser(@RequestParam String email, @RequestParam String password,
                              @RequestParam String name, @RequestParam String surname,
@@ -28,13 +27,5 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @PostMapping("/login")
-    public String loginUser(@RequestParam String email, @RequestParam String password) {
-        boolean loginSuccess = userService.loginUser(email, password);
-        if (loginSuccess) {
-            return "redirect:/"; // Przekierowanie do strony głównej po udanym logowaniu
-        } else {
-            return "redirect:/login?error"; // Przekierowanie na stronę logowania z informacją o błędzie
-        }
-    }
+    // Metoda loginUser nie jest potrzebna, ponieważ Spring Security obsługuje logowanie
 }

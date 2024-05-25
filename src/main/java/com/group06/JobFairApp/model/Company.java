@@ -26,6 +26,9 @@ public class Company {
     private String websiteUrl;
 
     @Column(columnDefinition = "TEXT")
+    private String skills;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(columnDefinition = "TEXT")
@@ -36,7 +39,7 @@ public class Company {
 
     public Company(String name, String logoUrl, String imgUrl, String jobTopics,
                    int boothNumber, String websiteUrl, String description,
-                   String who_looking_for, String longDescription) {
+                   String who_looking_for, String longDescription, String skills) {
         this.name = name;
         this.logoUrl = logoUrl;
         this.imgUrl = imgUrl;
@@ -46,21 +49,39 @@ public class Company {
         this.description = description;
         this.whoLookingFor = who_looking_for;
         this.longDescription = longDescription;
+        this.skills = skills;
     }
 
-    public boolean matchesJobTopics(List<String> jobTopics) {
-        if (jobTopics == null) {
+    public boolean matchesJobTopics(List<String> filters) {
+        if (filters == null) {
             return false;
         }
 
         String[] companyjobTopics = this.jobTopics.split(", ");
 
         for (String topic : companyjobTopics) {
-            if (jobTopics.contains(topic)) {
+            if (filters.contains("F1 " + topic)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public double matchedSkills(List<String> filters) {
+        if (filters == null) {
+            return 0.0;
+        }
+
+        String[] companySkills = this.skills.split(", ");
+        int matchedSkills = 0;
+        int allSkills = companySkills.length;
+        for (String skill : companySkills) {
+            if (filters.contains("F2 " + skill)) {
+                matchedSkills++;
+            }
+        }
+
+        return ((double) matchedSkills / allSkills);
     }
 }

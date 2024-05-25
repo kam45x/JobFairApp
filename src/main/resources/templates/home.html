@@ -23,33 +23,55 @@
 </div>
 <div class="container">
     <h2 class="section-title">Lista firm</h2>
-    <button id="toggleFiltersButton" onclick="toggleFilters()">Wybierz kierunek studiów</button>
-    <div class="filters" id="filtersContainer" style="display: none;">
+    <button id="toggleFiltersButton" onclick="toggleFilters()">Wybierz filtry</button>
+    <div class="filters" id="topicsContainer" style="display: none;">
         <form th:action="@{/applyFilters}" th:object="${filterForm}" method="post">
             <!-- Filtry -->
+            <p>Kierunki studiów</p>
             <div>
-                <input type="checkbox" th:field="*{selectedFilters}" value="Automatyka" id="filter1" name="filter1">
+                <input type="checkbox" th:field="*{selectedFilters}" value="F1 Automatyka" id="filter1" name="filter1">
                 <label for="filter1">Automatyka</label>
             </div>
             <div>
-                <input type="checkbox" th:field="*{selectedFilters}" value="Robotyka" id="filter2" name="filter2">
+                <input type="checkbox" th:field="*{selectedFilters}" value="F1 Robotyka" id="filter2" name="filter2">
                 <label for="filter2">Robotyka</label>
             </div>
             <div>
-                <input type="checkbox" th:field="*{selectedFilters}" value="Informatyka" id="filter3" name="filter3">
+                <input type="checkbox" th:field="*{selectedFilters}" value="F1 Informatyka" id="filter3" name="filter3">
                 <label for="filter3">Informatyka</label>
             </div>
             <div>
-                <input type="checkbox" th:field="*{selectedFilters}" value="Inżynieria Internetu Rzeczy" id="filter4" name="filter4">
+                <input type="checkbox" th:field="*{selectedFilters}" value="F1 Inżynieria Internetu Rzeczy" id="filter4" name="filter4">
                 <label for="filter4">Inżynieria Internetu Rzeczy</label>
             </div>
             <div>
-                <input type="checkbox" th:field="*{selectedFilters}" value="Telekomunikacja" id="filter5" name="filter5">
+                <input type="checkbox" th:field="*{selectedFilters}" value="F1 Telekomunikacja" id="filter5" name="filter5">
                 <label for="filter5">Telekomunikacja</label>
             </div>
             <div>
-                <input type="checkbox" th:field="*{selectedFilters}" value="Zarządzanie" id="filter6" name="filter6">
+                <input type="checkbox" th:field="*{selectedFilters}" value=" F1 Zarządzanie" id="filter6" name="filter6">
                 <label for="filter6">Zarządzanie</label>
+            </div>
+            <p>Technologie</p>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="F2 Java" id="filter2.1" name="filter2.1">
+                <label for="filter2.1">Java</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="F2 C" id="filter2.2" name="filter2.2">
+                <label for="filter2.2">C</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="F2 C++" id="filter2.3" name="filter2.3">
+                <label for="filter2.3">C++</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="F2 Python" id="filter2.4" name="filter2.4">
+                <label for="filter2.4">Python</label>
+            </div>
+            <div>
+                <input type="checkbox" th:field="*{selectedFilters}" value="F2 ROS" id="filter2.5" name="filter2.5">
+                <label for="filter2.5">ROS</label>
             </div>
             <button type="submit" id="applyFilters">Zastosuj filtry</button>
         </form>
@@ -64,6 +86,10 @@
                 <p th:text="${company.jobTopics}"></p>
             </div>
             <div class="specialties">
+                <p>Technologie</p>
+                <p th:text="${company.getSkills()}"></p>
+            </div>
+            <div class="specialties">
                 <p>Numer stoiska</p>
                 <p th:text="${company.getBoothNumber()}"></p>
             </div>
@@ -75,17 +101,25 @@
 </div>
 <script>
     function toggleFilters() {
-        var filtersContainer = document.getElementById("filtersContainer");
-        if (filtersContainer.style.display === "none") {
-            filtersContainer.style.display = "block";
+        var filtersContainer1 = document.getElementById("topicsContainer");
+        var filtersContainer2 = document.getElementById("skillsContainer");
+        if (filtersContainer1.style.display === "none") {
+            filtersContainer1.style.display = "block";
         } else {
-            filtersContainer.style.display = "none";
+            filtersContainer1.style.display = "none";
+        }
+        if (filtersContainer2.style.display === "none") {
+            filtersContainer2.style.display = "block";
+        } else {
+            filtersContainer2.style.display = "none";
         }
     }
 
     document.getElementById("applyFilters").addEventListener("click", function() {
-        var filtersContainer = document.getElementById("filtersContainer");
-        filtersContainer.style.display = "none";
+        var filtersContainer1 = document.getElementById("filtersContainer");
+        var filtersContainer2 = document.getElementById("skillsContainer");
+        filtersContainer1.style.display = "none";
+        filtersContainer2.style.display = "none";
     });
 </script>
 

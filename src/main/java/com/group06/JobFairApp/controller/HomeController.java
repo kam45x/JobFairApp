@@ -66,10 +66,19 @@ public class HomeController {
         for (Company company : companyRepository.findAll()) {
             Optional<Booth> boothOptional = booths.stream().filter(booth -> booth.getBoothNumber() == company.getBoothNumber()).findFirst();
             if (company.matchesJobTopics(filterForm.getSelectedFilters())) {
-                boothOptional.ifPresent(booth -> booth.setColorByName("green"));
+                double matchedSkills = company.matchedSkills(filterForm.getSelectedFilters());
+                if (matchedSkills < 0.1) {
+                    boothOptional.ifPresent(booth -> booth.setColorByName("green1"));
+                }
+                else if (matchedSkills > 0.1 && matchedSkills < 0.7) {
+                    boothOptional.ifPresent(booth -> booth.setColorByName("green2"));
+                }
+                else {
+                    boothOptional.ifPresent(booth -> booth.setColorByName("green3"));
+                }
             }
             else {
-                boothOptional.ifPresent(booth -> booth.setColorByName("gray"));
+                boothOptional.ifPresent(booth -> booth.setColorByName("dimGray"));
             }
             boothOptional.ifPresent(boothRepository::save);
         }

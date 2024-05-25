@@ -36,11 +36,20 @@ public class Booth {
 
     public void setColorByName(String colorName) {
         switch (colorName) {
-            case "green" :
+            case "green1" :
+                this.color = "#98FB98";
+                break;
+            case "green2":
+                this.color = "#3CB371";
+                break;
+            case "green3":
                 this.color = "#008000";
                 break;
             case "gray":
                 this.color = "#ddd";
+                break;
+            case "dimGray":
+                this.color = "#696969";
                 break;
         }
     }

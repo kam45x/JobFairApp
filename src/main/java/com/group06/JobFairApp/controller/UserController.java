@@ -33,6 +33,12 @@ public class UserController {
                 RedirectFormAttributes(name, surname, phoneNumber, redirectAttributes);
                 return "redirect:/signin";
             }
+            if (password.length() < 8) {
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Hasło nie może być krótsze niż 8 znaków");
+                RedirectFormAttributes(name, surname, phoneNumber, redirectAttributes);
+                return "redirect:/signin";
+            }
             if (!isPasswordValid(password)) {
                 redirectAttributes.addFlashAttribute("errorMessage",
                         "Hasło musi zawierać małą literę, dużą literę, cyfrę i znak specjalny");
@@ -57,7 +63,7 @@ public class UserController {
     }
 
     private boolean isPasswordValid(String password) {
-        return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).+$").matcher(password).matches();
+        return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[/@#$%^&+=!_-]).+$").matcher(password).matches();
     }
 
 }

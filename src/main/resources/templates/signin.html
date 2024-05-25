@@ -59,13 +59,13 @@
             margin-top: 20px;
             margin-left: 30%;
             width: 40%;
-            border-radius: 5px; /* Dodaj zaokrąglone rogi */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dodaj cień */
-            transition: background-color 0.3s ease, filter 0.3s ease; /* Dodaj efekt przejścia dla zmiany koloru tła i jasności */
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, filter 0.3s ease;
         }
 
         button:hover {
-            filter: brightness(1.5); /* Zwiększ jasność przycisku przy najechaniu */
+            filter: brightness(1.5);
         }
 
         .error-message {
@@ -73,6 +73,33 @@
             font-weight: bold;
             text-align: center;
         }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .show-password-icon {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .show-password-icon img {
+            width: 16px;
+            height: 16px;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -99,17 +126,38 @@
             <label>Adres e-mail:</label>
             <input type="text" name="email" required>
         </div>
+
         <div class="form-group">
-            <label>Hasło:</label>
-            <input type="password" name="password" required>
+            <label for="password">Hasło:</label>
+            <div class="password-input-container">
+                <input type="password" id="password" name="password" required>
+                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility('password', 'showPassword')">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/visible--v1.png" alt="Pokaż hasło">
+                </button>
+            </div>
         </div>
+
         <div class="form-group">
-            <label>Powtórz hasło:</label>
-            <input type="password" name="repeatedPassword" required>
+            <label for="repeatedPassword">Powtórz hasło:</label>
+            <div class="password-input-container">
+                <input type="password" id="repeatedPassword" name="repeatedPassword" required>
+                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility('repeatedPassword', 'showRepeatedPassword')">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/visible--v1.png" alt="Pokaż hasło">
+                </button>
+            </div>
         </div>
+
+
         <button type="submit">Zarejestruj się</button>
     </form>
 </div>
+
+<script>
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+</script>
 
 </body>
 </html>

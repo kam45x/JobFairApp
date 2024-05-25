@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error=true")
+                .usernameParameter("username") // Wskazuje nazwę parametru dla pola email
                 .permitAll()
             )
             .logout(logout -> logout

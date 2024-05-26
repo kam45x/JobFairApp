@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -40,6 +37,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
+        // Companies
         model.addAttribute("companies", companyRepository.findAll());
 
         // Add sorted booths
@@ -60,9 +58,33 @@ public class HomeController {
         model.addAttribute("booths", sortedBooths);
         this.colorBooths();
 
+        // Filter form
         model.addAttribute("filterForm", filterForm);
         model.addAttribute("selectedFilters", filterForm.getSelectedFilters());
 
+        // All filters
+        List<String> allJobTopics = new ArrayList<>();
+        List<String> allSkills = new ArrayList<>();
+        for (Company company : companyRepository.findAll()) {
+            String[] companyJobTopics = company.getJobTopics().split(", ");
+            String[] companySkills = company.getSkills().split(", ");
+
+            for (String companyJobTopic : companyJobTopics) {
+                if (!allJobTopics.contains(companyJobTopic)) {
+                    allJobTopics.add(companyJobTopic);
+                }
+            }
+
+            for (String companySkill : companySkills) {
+                if (!allSkills.contains(companySkill)) {
+                    allSkills.add(companySkill);
+                }
+            }
+        }
+        model.addAttribute("allJobTopics", allJobTopics);
+        model.addAttribute("allSkills", allSkills);
+
+        // Authentication
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             model.addAttribute("user", user);

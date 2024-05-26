@@ -1,7 +1,6 @@
 package com.group06.JobFairApp.security;
 
 import lombok.NoArgsConstructor;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,26 +18,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @NoArgsConstructor
 public class SecurityConfig {
 
-//    private final CustomUserDetailsService customUserDetailsService;
-
-//    @Autowired
-//    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
-//        this.customUserDetailsService = customUserDetailsService;
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/**").permitAll()
-//                .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/login?error=true")
-                .usernameParameter("username") // Wskazuje nazwę parametru dla pola email
+                .failureHandler((request, response, exception) -> {
+                    request.getSession().setAttribute("username", request.getParameter("username"));
+                    response.sendRedirect("/login?error=true");
+                })
+                .usernameParameter("username")
                 .permitAll()
             )
             .logout(logout -> logout
@@ -48,8 +42,8 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID")
                 .permitAll()
             )
-            .csrf(AbstractHttpConfigurer::disable) // Wyłączenie CSRF dla H2-console
-            .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)); // Ustawienie nagłówka dla H2-console
+            .csrf(AbstractHttpConfigurer::disable)
+            .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         return http.build();
     }

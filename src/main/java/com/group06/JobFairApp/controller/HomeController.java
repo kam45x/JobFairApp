@@ -7,6 +7,7 @@ import com.group06.JobFairApp.model.Users;
 import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +81,12 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            model.addAttribute("username", username);
+            session.removeAttribute("username"); // Usuń atrybut po odczytaniu
+        }
         return "login";
     }
 

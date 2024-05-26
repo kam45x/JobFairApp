@@ -3,6 +3,7 @@ package com.group06.JobFairApp.controller;
 import com.group06.JobFairApp.FilterForm;
 import com.group06.JobFairApp.model.Booth;
 import com.group06.JobFairApp.model.Company;
+import com.group06.JobFairApp.model.Users;
 import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
@@ -64,6 +65,16 @@ public class HomeController {
         }
 
         return "home";
+    }
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/signin")
+    public String showSignUpPage() {
+        return "signin";
     }
 
     @PostMapping("/applyFilters")

@@ -21,29 +21,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/**").permitAll()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .failureHandler((request, response, exception) -> {
-                    request.getSession().setAttribute("username", request.getParameter("username"));
-                    response.sendRedirect("/login?error=true");
-                })
-                .usernameParameter("username")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .permitAll()
-            )
-            .csrf(AbstractHttpConfigurer::disable)
-            .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/adminView/**").hasRole("ADMIN")
+                        .requestMatchers("/**").permitAll()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .successHandler((request, response, authentication) -> {
+                            if (authentication.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+                                response.sendRedirect("/adminView");
+                            } else {
+                                response.sendRedirect("/");
+                            }
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            request.getSession().setAttribute("username", request.getParameter("username"));
+                            response.sendRedirect("/login?error=true");
+                        })
+                        .usernameParameter("username")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         return http.build();
     }

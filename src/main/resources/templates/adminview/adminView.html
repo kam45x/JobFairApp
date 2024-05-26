@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administratora</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <style>
+        .header-left {
+            float: left;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+        header::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .admin-buttons {
+            margin: 20px 0;
+        }
+
+        .admin-buttons a {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .admin-btn button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .admin-btn button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <header>
+        <div class="header-left">
+            <h1>Panel Administratora</h1>
+        </div>
+        <div class="header-right">
+            <a th:href="@{/logout}"><button>Wyloguj się</button></a>
+        </div>
+    </header>
+
+    <div class="container admin-panel">
+        <div class="admin-buttons">
+            <a th:href="@{/adminView/addCompany}" class="admin-btn"><button>Dodaj firmę</button></a>
+            <a th:href="@{/adminView/addWorkshop}" class="admin-btn"><button>Dodaj warsztaty</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

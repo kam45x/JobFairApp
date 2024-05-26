@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/addCompany")
+@RequestMapping("adminView/addCompany")
 public class AddCompanyController {
 
     private final CompanyRepository companyRepository;

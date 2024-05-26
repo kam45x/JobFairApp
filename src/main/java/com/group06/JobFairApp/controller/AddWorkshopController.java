@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/addWorkshop")
+@RequestMapping("adminView/addWorkshop")
 public class AddWorkshopController {
 
     private final WorkshopRepository workshopRepository;

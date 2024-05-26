@@ -1,7 +1,8 @@
 package com.group06.JobFairApp.controller;
 
 import com.group06.JobFairApp.FilterForm;
-import com.group06.JobFairApp.model.Users;
+import com.group06.JobFairApp.model.Booth;
+import com.group06.JobFairApp.model.Company;
 import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
@@ -11,6 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -27,12 +33,20 @@ public class HomeController {
         this.boothRepository = boothRepository;
         this.authenticationService = authenticationService;
         this.filterForm = new FilterForm();
+        this.colorBooths();
     }
 
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("companies", companyRepository.findAll());
-        model.addAttribute("booths", boothRepository.findAll());
+
+        // Sort booths before adding to the model
+        List<Booth> booths = boothRepository.findAll();
+        List<Booth> sortedBooths = booths.stream()
+                .sorted(Comparator.comparing(Booth::getBoothNumber))
+                .collect(Collectors.toList());
+        model.addAttribute("booths", sortedBooths);
+
         model.addAttribute("filterForm", filterForm);
         model.addAttribute("selectedFilters", filterForm.getSelectedFilters());
 
@@ -54,17 +68,35 @@ public class HomeController {
 
     @PostMapping("/applyFilters")
     public String applyFilters(@ModelAttribute FilterForm filterForm, Model model) {
+        // Update filter form
         this.filterForm = filterForm;
+
+        // Color booths
+        this.colorBooths();
+
         return "redirect:/";
     }
 
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login";
-    }
-
-    @GetMapping("/signin")
-    public String showSignUpPage() {
-        return "signin";
+    public void colorBooths() {
+        List<Booth> booths = boothRepository.findAll();
+        for (Company company : companyRepository.findAll()) {
+            Optional<Booth> boothOptional = booths.stream().filter(booth -> booth.getBoothNumber() == company.getBoothNumber()).findFirst();
+            if (company.matchesJobTopics(filterForm.getSelectedFilters())) {
+                double matchedSkills = company.matchedSkills(filterForm.getSelectedFilters());
+                if (matchedSkills < 0.1) {
+                    boothOptional.ifPresent(booth -> booth.setColorByName("green1"));
+                }
+                else if (matchedSkills > 0.1 && matchedSkills < 0.7) {
+                    boothOptional.ifPresent(booth -> booth.setColorByName("green2"));
+                }
+                else {
+                    boothOptional.ifPresent(booth -> booth.setColorByName("green3"));
+                }
+            }
+            else {
+                boothOptional.ifPresent(booth -> booth.setColorByName("dimGray"));
+            }
+            boothOptional.ifPresent(boothRepository::save);
+        }
     }
 }

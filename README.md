@@ -18,3 +18,6 @@ Z06
 
 ## Drugi etap projektu - działający prototyp
 [Dokumentacja II etapu](docs/II_etap.md)
+
+## Dokumentacja - inne
+[Tworzenia bazy danych PostgreSQL](docs/BazaDanych.md)

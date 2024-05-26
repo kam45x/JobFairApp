@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,12 +42,23 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("companies", companyRepository.findAll());
 
-        // Sort booths before adding to the model
+        // Add sorted booths
         List<Booth> booths = boothRepository.findAll();
+        Map<Integer, String> companyMap = companyRepository.findAll().stream()
+                .collect(Collectors.toMap(Company::getBoothNumber, Company::getName));
+
+        booths.forEach(booth -> {
+            if (companyMap.containsKey(booth.getBoothNumber())) {
+                booth.setCompanyName(companyMap.get(booth.getBoothNumber()));
+            }
+        });
+
         List<Booth> sortedBooths = booths.stream()
                 .sorted(Comparator.comparing(Booth::getBoothNumber))
                 .collect(Collectors.toList());
+
         model.addAttribute("booths", sortedBooths);
+        this.colorBooths();
 
         model.addAttribute("filterForm", filterForm);
         model.addAttribute("selectedFilters", filterForm.getSelectedFilters());

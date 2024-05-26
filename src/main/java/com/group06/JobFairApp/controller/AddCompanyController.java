@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/addCompany")
+public class AddCompanyController {
 
     private final CompanyRepository companyRepository;
 
     @Autowired
-    public AdminController(CompanyRepository companyRepository)
+    public AddCompanyController(CompanyRepository companyRepository)
     {
         this.companyRepository = companyRepository;
     }

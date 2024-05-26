@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj nową prelekcję</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        button {
+            background-color: rebeccapurple;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Dodaj nową firmę</h2>
+    <form th:action="@{/addWorkshop}" method="post">
+        <div class="form-group">
+            <label>Tytuł prelekcji:</label>
+            <input type="text" name="title" required>
+        </div>
+        <div class="form-group">
+            <label>Data:</label>
+            <input type="text" name="date" required>
+        </div>
+        <div class="form-group">
+            <label>Godzina:</label>
+            <input type="text" name="time" required>
+        </div>
+        <div class="form-group">
+            <label>Miejsce:</label>
+            <input type="text" name="place" required>
+        </div>
+        <div class="form-group">
+            <label>Prowadzący:</label>
+            <input type="text" name="host" required>
+        </div>
+        <button type="submit">Dodaj prelekcję</button>
+    </form>
+</div>
+
+</body>
+</html>

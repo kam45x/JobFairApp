@@ -2,8 +2,11 @@ package com.group06.JobFairApp;
 
 import com.group06.JobFairApp.model.Booth;
 import com.group06.JobFairApp.model.Company;
+import com.group06.JobFairApp.model.Workshop;
 import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
+import com.group06.JobFairApp.repository.WorkshopRepository;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +21,13 @@ public class DbInit implements CommandLineRunner {
     private final int numberOfBooths = 15;
     private final CompanyRepository companyRepository;
     private final BoothRepository boothRepository;
+    private final WorkshopRepository workshopRepository;
 
     @Autowired
-    public DbInit(CompanyRepository companyRepository, BoothRepository boothRepository) {
+    public DbInit(CompanyRepository companyRepository, BoothRepository boothRepository, WorkshopRepository workshopRepository) {
         this.companyRepository = companyRepository;
         this.boothRepository = boothRepository;
+        this.workshopRepository = workshopRepository;
     }
 
     @Override
@@ -34,6 +39,11 @@ public class DbInit implements CommandLineRunner {
                 new Company("British American Tobacco Poland", "https://grubber.gpcdn.pl/companies/20063136/employer-profile-logos/9b030000-5dac-0015-fbcb-08daf2ed4112.png", "https://upload.wikimedia.org/wikipedia/commons/e/e2/British_American_Tobacco_Headquarters.jpg", "Automatyka", 3, "https://www.bat.com/", "Jesteśmy fabryką szlugów z Augustowa. Trujemy ludzi i nie potrafimy poznać się na kandydatach.", "Palaczy i automatyków", "Spółka British American Tobacco Ltd. została założona w 1902 jako wspólne przedsięwzięcie brytyjskiego Imperial Tobacco Company i amerykańskiego American Tobacco Company. Interesy prowadziła m.in. w Chinach, Kanadzie, Nowej Zelandii i Australii, nie działała jednak w Wielkiej Brytanii ani USA. W 1911 American Tobacco sprzedało udziały, natomiast Imperial Tobacco stopniowo redukowało swoje zaangażowanie w spółce aż do 1980.\n" +
                         "\n" +
                         "Po reorganizacji przeprowadzonej w 1976, przedsiębiorstwa należące do grupy były zarządzane przez nową spółkę holdingową – B.A.T. Industries. W 1994 BAT przejął swoją dawną spółkę-matkę, American Tobacco, dzięki czemu zyskał marki Lucky Strike i Pall Mall. W 1999 nabył spółkę Rothmans International, posiadającą udziały w fabryce w Mjanmie, co stało się powodem krytyki ze strony obrońców praw człowieka. Pod naciskiem rządu brytyjskiego BAT sprzedał w 2003 udziały w tej wytwórni. W tym samym roku przejął włoskie przedsiębiorstwo tytoniowe Ente Tabacchi Italiani. W 2007 zakończył działalność produkcyjną w Wielkiej Brytanii. W 2008 roku BAT przejął Scandinavian Tobacco\uFEFF[w innych językach]. 17 stycznia 2017 uzgodniono, że BAT przejmie całkowicie konkurencyjny koncern Reynolds American\uFEFF[w innych językach] za 49,4 mld dolarów.", "ST, Ladder, SCADA")
+        );
+
+        List<Workshop> workshops = List.of(
+                new Workshop("Programowanie w języku Python", "5 czerwca 2024", "10:00 - 11:00", "Sala konferencyjna C", "Konrad Karpiuk"),
+                new Workshop("Elektronika analogowa zaawansowana bardziej niż ELA2", "5 czerwca 2024", "11:00 - 12:00", "Sala konferencyjna A", "Piotr Sienkiewicz")
         );
 
         // Init booths
@@ -61,7 +71,17 @@ public class DbInit implements CommandLineRunner {
             }
         }
 
+        // Add workshops to repository without duplicates
+        List<Workshop> existingWorkshops = workshopRepository.findAll();
+        List<Workshop> newWorkshops = new ArrayList<>();
+        for (Workshop workshop : workshops) {
+            if (existingWorkshops.stream().noneMatch(existingWorkshop -> existingWorkshop.getTitle().equals(workshop.getTitle()))) {
+                newWorkshops.add(workshop);
+            }
+        }
+
         boothRepository.saveAll(newBooths);
         companyRepository.saveAll(newCompanies);
+        workshopRepository.saveAll(newWorkshops);
     }
 }

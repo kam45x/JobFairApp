@@ -1,27 +1,35 @@
 package com.group06.JobFairApp.controller;
 
+import com.group06.JobFairApp.model.Workshop;
 import com.group06.JobFairApp.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/workshops")
-public class WorkshopsController {
+@RequestMapping("/addWorkshop")
+public class AddWorkshopController {
 
     private final WorkshopRepository workshopRepository;
 
     @Autowired
-    public WorkshopsController(WorkshopRepository workshopRepository) {
+    public AddWorkshopController(WorkshopRepository workshopRepository) {
         this.workshopRepository = workshopRepository;
     }
 
-    @GetMapping("/page")
-    public String showWorkshops(Model model) {
-        model.addAttribute("workshops", workshopRepository.findAll());
+    @GetMapping
+    private String adminPage()
+    {
+        return "adminview/addWorkshop";
+    }
 
-        return "workshops";
+    @PostMapping
+    private String addCompany(Workshop workshop)
+    {
+        workshopRepository.save(workshop);
+        return "redirect:/";
     }
 }
+

@@ -34,6 +34,9 @@
 </div>
 <div class="container">
     <h2 class="section-title">Lista firm</h2>
+    <div class="btn-container">
+        <a th:href="@{'/showAll'}" class="btn">Pokaż wszystkie firmy</a>
+    </div>
     <button id="toggleFiltersButton" onclick="toggleFilters()">Wybierz filtry</button>
     <div class="filters" id="topicsContainer" style="display: none;">
         <form th:action="@{/applyFilters}" th:object="${filterForm}" method="post">
@@ -50,7 +53,7 @@
             <button type="submit" id="applyFilters">Zastosuj filtry</button>
         </form>
     </div>
-    <div class="company" th:each="company : ${companies}" th:if="${company.matchesJobTopics(selectedFilters)}">
+    <div class="company" th:each="company : ${companies}" th:if="${company.shouldBeShowed(selectedFilters, showAll)}">
         <div class="company-details">
             <h2 th:text="${company.name}"></h2>
             <img th:src="@{${company.getLogoUrl}}" class="center">

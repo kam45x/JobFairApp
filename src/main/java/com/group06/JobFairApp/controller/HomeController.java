@@ -24,6 +24,7 @@ public class HomeController {
     private final BoothRepository boothRepository;
     private final AuthenticationService authenticationService;
     private FilterForm filterForm;
+    private boolean showAll;
 
     @Autowired
     public HomeController(CompanyRepository companyRepository, BoothRepository boothRepository,
@@ -32,11 +33,15 @@ public class HomeController {
         this.boothRepository = boothRepository;
         this.authenticationService = authenticationService;
         this.filterForm = new FilterForm();
+        this.showAll = true;
         this.colorBooths();
     }
 
     @GetMapping("/")
     public String home(Model model) {
+        // Show all companies
+        model.addAttribute("showAll", this.showAll);
+
         // Companies
         model.addAttribute("companies", companyRepository.findAll());
 
@@ -119,6 +124,15 @@ public class HomeController {
         // Color booths
         this.colorBooths();
 
+        this.showAll = false;
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/showAll")
+    public String showAllCompanies(Model model) {
+        this.showAll = true;
+
         return "redirect:/";
     }
 
@@ -126,7 +140,7 @@ public class HomeController {
         List<Booth> booths = boothRepository.findAll();
         for (Company company : companyRepository.findAll()) {
             Optional<Booth> boothOptional = booths.stream().filter(booth -> booth.getBoothNumber() == company.getBoothNumber()).findFirst();
-            if (company.matchesJobTopics(filterForm.getSelectedFilters())) {
+            if (company.shouldBeShowed(filterForm.getSelectedFilters(), false) && !this.showAll) {
                 double matchedSkills = company.matchedSkills(filterForm.getSelectedFilters());
                 if (matchedSkills < 0.1) {
                     boothOptional.ifPresent(booth -> booth.setColorByName("green1"));

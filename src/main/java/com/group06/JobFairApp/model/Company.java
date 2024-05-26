@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serial;
 import java.util.List;
 
 @NoArgsConstructor
@@ -52,7 +51,10 @@ public class Company {
         this.skills = skills;
     }
 
-    public boolean matchesJobTopics(List<String> filters) {
+    public boolean shouldBeShowed(List<String> filters, boolean showAll) {
+        if (showAll) {
+            return true;
+        }
         if (filters == null) {
             return false;
         }

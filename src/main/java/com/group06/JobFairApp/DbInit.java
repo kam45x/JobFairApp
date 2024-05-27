@@ -51,8 +51,8 @@ public class DbInit implements CommandLineRunner {
         );
 
         List<Workshop> workshops = List.of(
-                new Workshop("Programowanie w języku Python", "5 czerwca 2024", "10:00 - 11:00", "Sala konferencyjna C", "Konrad Karpiuk"),
-                new Workshop("Elektronika analogowa zaawansowana bardziej niż ELA2", "5 czerwca 2024", "11:00 - 12:00", "Sala konferencyjna A", "Piotr Sienkiewicz")
+                new Workshop("Programowanie w języku Python", "2024-05-30", "10:00", "Sala konferencyjna C", "Konrad Karpiuk", 90),
+                new Workshop("Elektronika analogowa zaawansowana bardziej niż ELA2", "2024-06-19", "11:00", "Sala konferencyjna A", "Piotr Sienkiewicz", 45)
         );
 
         // Init booths

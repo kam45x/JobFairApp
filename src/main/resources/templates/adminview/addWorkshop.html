@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodaj nową prelekcję</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,6 +28,8 @@
         }
         input[type="text"],
         input[type="number"],
+        input[type="time"],
+        input[type="date"],
         button {
             width: 100%;
             padding: 10px;
@@ -39,36 +42,63 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        .error {
+            color: red;
+            margin-top: 5px;
+            white-space: pre-line;
+        }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h2>Dodaj nową firmę</h2>
-    <form th:action="@{/addWorkshop}" method="post">
+    <h2>Dodaj nową prelekcję</h2>
+    <form th:action="@{/adminView/addWorkshop}" th:object="${workshop}" method="post">
         <div class="form-group">
             <label>Tytuł prelekcji:</label>
-            <input type="text" name="title" required>
+            <input type="text" th:field="*{title}" required>
         </div>
         <div class="form-group">
             <label>Data:</label>
-            <input type="text" name="date" required>
+            <input id="datepicker" type="text" th:field="*{date}" required>
         </div>
         <div class="form-group">
             <label>Godzina:</label>
-            <input type="text" name="time" required>
+            <input id="timepicker" type="text" th:field="*{time}" required>
+            <div th:if="${#fields.hasErrors('time')}" th:errors="*{time}" class="error"></div>
         </div>
         <div class="form-group">
             <label>Miejsce:</label>
-            <input type="text" name="place" required>
+            <input type="text" th:field="*{place}" required>
+            <div th:if="${#fields.hasErrors('place')}" class="error" th:errors="*{place}"></div>
         </div>
         <div class="form-group">
             <label>Prowadzący:</label>
-            <input type="text" name="host" required>
+            <input type="text" th:field="*{host}" required>
         </div>
+        <div class="form-group">
+            <label>Czas trwania (minuty):</label>
+            <input type="number" th:field="*{duration}" required min="5" step="5">
+        </div>
+
         <button type="submit">Dodaj prelekcję</button>
     </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#timepicker", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+        minuteIncrement: 5,
+        defaultHour: 9,
+        defaultMinute: 0
+    });
+    flatpickr("#datepicker", {
+        dateFormat: "Y-m-d",
+        minDate: "today"
+    });
+</script>
 </body>
 </html>

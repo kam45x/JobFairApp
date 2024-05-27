@@ -7,65 +7,144 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <style>
-        .header-left {
-            float: left;
-        }
+<style>
+    .header-left {
+        float: left;
+    }
 
-        .header-right {
-            float: right;
-        }
+    .header-right {
+        float: right;
+    }
 
-        header::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
+    header::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 
-        .container {
-            text-align: center;
-            margin-top: 50px;
-        }
+    .container {
+        text-align: center;
+        margin-top: 50px;
+    }
 
-        .admin-buttons {
-            margin: 20px 0;
-        }
+    .admin-buttons {
+        margin: 20px 0;
+    }
 
-        .admin-buttons a {
-            display: inline-block;
-            margin: 10px;
-        }
+    .admin-buttons a {
+        display: inline-block;
+        margin: 10px;
+    }
 
-        .admin-btn button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .admin-btn button {
+        padding: 15px 30px;
+        font-size: 18px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-        .admin-btn button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    .admin-btn button:hover {
+        background-color: #0056b3;
+    }
 
-    <header>
-        <div class="header-left">
-            <h1>Panel Administratora</h1>
-        </div>
-        <div class="header-right">
-            <a th:href="@{/logout}"><button>Wyloguj się</button></a>
-        </div>
-    </header>
+    .company-list-container {
+        margin: 20px auto;
+        max-width: 90%;
+        overflow-x: auto;
+        overflow-y: scroll;
+        max-height: 400px;
+        border: 1px solid #ddd;
+    }
 
-    <div class="container admin-panel">
-        <div class="admin-buttons">
-            <a th:href="@{/adminView/addCompany}" class="admin-btn"><button>Dodaj firmę</button></a>
-            <a th:href="@{/adminView/addWorkshop}" class="admin-btn"><button>Dodaj warsztaty</button></a>
+    .company-list table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .company-list th, .company-list td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .company-list th {
+        background-color: #f4f4f4;
+        position: sticky;
+        top: 0;
+    }
+
+    .action-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .edit-btn {
+        background-color: #28a745;
+    }
+
+    .delete-btn {
+        background-color: #dc3545;
+    }
+
+    .edit-btn:hover {
+        background-color: #218838;
+    }
+
+    .delete-btn:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<header>
+    <div class="header-left">
+        <h1>Panel Administratora</h1>
+    </div>
+    <div class="header-right">
+        <a th:href="@{/logout}"><button>Wyloguj się</button></a>
+    </div>
+</header>
+
+<div class="container admin-panel">
+    <div class="admin-buttons">
+        <a th:href="@{/adminView/addCompany}" class="admin-btn"><button>Dodaj firmę</button></a>
+        <a th:href="@{/adminView/addWorkshop}" class="admin-btn"><button>Dodaj warsztaty</button></a>
+    </div>
+
+    <div class="company-list-container">
+        <div class="company-list">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nazwa firmy</th>
+                    <th>Numer stanowiska</th>
+                    <th>Poszukiwane osoby</th>
+                    <th>Preferowane umiejętności</th>
+                    <th>Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="company : ${companies}">
+                    <td th:text="${company.name}"></td>
+                    <td th:text="${company.boothNumber}"></td>
+                    <td th:text="${company.whoLookingFor}"></td>
+                    <td th:text="${company.skills}"></td>
+                    <td>
+                        <a th:href="@{/adminView/editCompany/{id}(id=${company.id})}" class="action-btn edit-btn">Edytuj</a>
+                        <a th:href="@{/adminView/deleteCompany/{id}(id=${company.id})}" class="action-btn delete-btn" onclick="return confirm('Czy na pewno chcesz usunąć tę firmę?')">Usuń</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 </body>
 </html>

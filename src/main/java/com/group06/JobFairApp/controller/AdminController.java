@@ -1,6 +1,8 @@
 package com.group06.JobFairApp.controller;
 
+import com.group06.JobFairApp.model.Booth;
 import com.group06.JobFairApp.model.Company;
+import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,12 @@ import java.util.List;
 public class AdminController {
 
     private final CompanyRepository companyRepository;
+    private final BoothRepository boothRepository;
 
     @Autowired
-    public AdminController(CompanyRepository companyRepository) {
+    public AdminController(CompanyRepository companyRepository, BoothRepository boothRepository) {
         this.companyRepository = companyRepository;
+        this.boothRepository = boothRepository;
     }
 
     @GetMapping
@@ -34,7 +38,13 @@ public class AdminController {
     @GetMapping("/deleteCompany/{id}")
     public String deleteCompany(@PathVariable("id") Long id) {
         Company company = companyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid company Id:" + id));
+        Booth booth = boothRepository.findByBoothNumber(company.getBoothNumber());
+
         companyRepository.delete(company);
+
+        booth.setCompanyName("Puste stoisko");
+        booth.setColor("#ddd");
+        boothRepository.save(booth);
         return "redirect:/adminView";
     }
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoothRepository extends JpaRepository<Booth, Long> {
+    Booth findByBoothNumber(int boothNumber);
 }

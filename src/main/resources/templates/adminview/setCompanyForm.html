@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodaj nową firmę do targów</title>
+    <title>Dodaj nową firmę lub edytuj istniejącą</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,8 +48,8 @@
 <body>
 
 <div class="container">
-    <h2>Dodaj nową firmę</h2>
-    <form th:action="@{/adminView/addCompany}" th:object="${company}" method="post">
+    <h2 th:text="${pageTitle}"></h2>
+    <form th:action="@{${actionUrl}}" th:object="${company}" method="post">
         <div class="form-group">
             <label>Nazwa firmy:</label>
             <input type="text" th:field="*{name}" required>
@@ -94,7 +94,7 @@
             <label>Kogo szuka firma:</label>
             <input type="text" th:field="*{whoLookingFor}" required>
         </div>
-        <button type="submit">Dodaj firmę</button>
+        <button type="submit" th:text="${buttonText}">Dodaj firmę</button>
     </form>
 </div>
 

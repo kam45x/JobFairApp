@@ -43,3 +43,8 @@ Usuń użytkowników od `id` wynoszącym 2 oraz 5
 DELETE FROM users
 WHERE id in (2,5);
 ```
+
+Policz wpisy w tablei `users`
+```
+SELECT count(*) FROM users;
+```

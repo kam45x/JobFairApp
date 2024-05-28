@@ -5,36 +5,30 @@ import com.group06.JobFairApp.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/adminView")
 public class AdminController {
 
+    private final CompanyRepository companyRepository;
+
     @Autowired
-    private CompanyRepository companyRepository;
+    public AdminController(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
 
     @GetMapping
     public String adminView(Model model) {
-        model.addAttribute("companies", companyRepository.findAll());
+        List<Company> companies = companyRepository.findAll();
+        companies.sort(Comparator.comparingInt(Company::getBoothNumber));
+
+        model.addAttribute("companiesNumber", companies.size());
+        model.addAttribute("companies", companies);
         return "adminview/adminView";
-    }
-
-    @GetMapping("/editCompany/{id}")
-    public String editCompanyForm(@PathVariable("id") Long id, Model model) {
-        Company company = companyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid company Id:" + id));
-        model.addAttribute("company", company);
-        return "adminview/editCompany";
-    }
-
-    @PostMapping("/saveCompany")
-    public String saveCompany(@ModelAttribute("company") Company company, BindingResult result) {
-        if (result.hasErrors()) {
-            return "adminview/editCompany";
-        }
-        companyRepository.save(company);
-        return "redirect:/adminView";
     }
 
     @GetMapping("/deleteCompany/{id}")

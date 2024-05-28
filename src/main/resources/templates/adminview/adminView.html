@@ -116,6 +116,21 @@
         <a th:href="@{/adminView/addCompany}" class="admin-btn"><button>Dodaj firmę</button></a>
         <a th:href="@{/adminView/addWorkshop}" class="admin-btn"><button>Dodaj warsztaty</button></a>
     </div>
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Targi Pracy</title>
+    </head>
+    <body>
+    <form>
+        <div th:with="lastTwoDigits=${companiesNumber % 100}, lastDigit=${lastTwoDigits % 10}">
+            <span th:if="${companiesNumber == 1}">Na targi pracy zgłoszona jest <span th:text="${companiesNumber}"></span> firma.</span>
+            <span th:if="${lastDigit == 0 or (lastDigit >= 5 and lastDigit <= 9) or (lastTwoDigits >= 11 and lastTwoDigits <= 14)}">Na targi pracy zgłoszonych jest <span th:text="${companiesNumber}"></span> firm.</span>
+            <span th:if="${lastDigit == 2 or lastDigit == 3 or lastDigit == 4}">Na targi pracy zgłoszone są <span th:text="${companiesNumber}"></span> firmy.</span>
+        </div>
+    </form>
+    </body>
+    </html>
 
     <div class="company-list-container">
         <div class="company-list">

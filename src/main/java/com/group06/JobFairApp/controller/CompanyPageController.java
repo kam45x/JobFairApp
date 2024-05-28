@@ -1,7 +1,11 @@
 package com.group06.JobFairApp.controller;
 
+import com.group06.JobFairApp.model.Company;
+import com.group06.JobFairApp.model.Users;
+import com.group06.JobFairApp.service.AuthenticationService;
 import com.group06.JobFairApp.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +17,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CompanyPageController {
 
     private final CompanyRepository companyRepository;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public CompanyPageController(CompanyRepository companyRepository)
-    {
+    public CompanyPageController(CompanyRepository companyRepository, AuthenticationService authenticationService) {
         this.companyRepository = companyRepository;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping("/page/{id}")
     public String showCompanyPage(@PathVariable("id") Long id, Model model)
     {
-        model.addAttribute("page_company", companyRepository.findById(id));
+        Company company = companyRepository.findById(id).orElse(null);
+        if (company != null) {
+            model.addAttribute("page_company", company);
+
+            Users user = authenticationService.getAuthenticatedUser();
+            if (user != null) {
+                model.addAttribute("authenticated", true);
+                model.addAttribute("isAdmin", user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
+                model.addAttribute("isFavorite", user.getFavoriteCompanies().contains(company));
+            } else {
+                model.addAttribute("authenticated", false);
+            }
+        }
         return "company_page";
     }
 }

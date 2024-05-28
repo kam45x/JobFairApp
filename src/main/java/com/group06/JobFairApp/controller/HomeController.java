@@ -9,6 +9,7 @@ import com.group06.JobFairApp.repository.CompanyRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -90,12 +91,12 @@ public class HomeController {
         model.addAttribute("allJobTopics", allJobTopics);
         model.addAttribute("allSkills", allSkills);
 
-        // Authentication
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             model.addAttribute("user", user);
             model.addAttribute("authenticated", true);
-            model.addAttribute("username", user.getUsername());
+            model.addAttribute("isAdmin", user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
+            model.addAttribute("favoriteCompanies", user.getFavoriteCompanies());
 
             System.out.println("User " + user.getName() + " with email " + user.getEmail() + " is authenticated");
         } else {

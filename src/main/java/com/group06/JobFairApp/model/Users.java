@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -28,6 +30,14 @@ public class Users implements UserDetails {
     private String surname;
     private String phoneNumber;
     private String roles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id")
+    )
+    private Set<Company> favoriteCompanies = new HashSet<>();
 
     public Users(String email, String password, String name, String surname, String phoneNumber, String roles) {
         this.email = email;
@@ -66,5 +76,13 @@ public class Users implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addFavoriteCompany(Company company) {
+        this.favoriteCompanies.add(company);
+    }
+
+    public void removeFavoriteCompany(Company company) {
+        this.favoriteCompanies.remove(company);
     }
 }

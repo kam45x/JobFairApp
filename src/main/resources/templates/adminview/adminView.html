@@ -139,7 +139,7 @@
                 <tr>
                     <th>Nazwa firmy</th>
                     <th>Numer stanowiska</th>
-                    <th>Poszukiwane osoby</th>
+                    <th>Poszukiwane kierunki</th>
                     <th>Preferowane umiejętności</th>
                     <th>Akcje</th>
                 </tr>
@@ -148,7 +148,7 @@
                 <tr th:each="company : ${companies}">
                     <td th:text="${company.name}"></td>
                     <td th:text="${company.boothNumber}"></td>
-                    <td th:text="${company.whoLookingFor}"></td>
+                    <td th:text="${company.jobTopics}"></td>
                     <td th:text="${company.skills}"></td>
                     <td>
                         <a th:href="@{/adminView/editCompany/{id}(id=${company.id})}" class="action-btn edit-btn">Edytuj</a>

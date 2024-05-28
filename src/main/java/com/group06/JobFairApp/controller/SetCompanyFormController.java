@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -21,6 +19,51 @@ public class SetCompanyFormController {
 
     private final CompanyRepository companyRepository;
     private final BoothRepository boothRepository;
+    private final List<String> availableJobTopics = Arrays.asList(
+            "Administracja",
+            "Architektura",
+            "Automatyka",
+            "Robotyka",
+            "Biotechnologia",
+            "Budownictwo",
+            "Cyberbezpieczeństwo",
+            "Ekonomia",
+            "Elektromobilność",
+            "Elektronika",
+            "Telekomunikacja",
+            "Elektrotechnika",
+            "Energetyka",
+            "Fizyka techniczna",
+            "Geodezja i kartografia",
+            "Geoinformatyka",
+            "Gospodarka przestrzenna",
+            "Informatyka",
+            "Systemy informacyjne",
+            "Inżynieria biomedyczna",
+            "Inżynieria chemiczna i procesowa",
+            "Inżynieria i analiza danych",
+            "Inżynieria Internetu rzeczy",
+            "Inżynieria materiałowa",
+            "Inżynieria mechaniczna",
+            "Inżynieria pojazdów elektrycznych i hybrydowych",
+            "Inżynieria środowiska",
+            "Inżynieria zarządzania",
+            "Lotnictwo i kosmonautyka",
+            "Matematyka",
+            "Matematyka i analiza danych",
+            "Mechanika i budowa maszyn",
+            "Mechanika i projektowanie maszyn",
+            "Mechatronika",
+            "Mechatronika pojazdów i maszyn roboczych",
+            "Ochrona środowiska",
+            "Papiernictwo i poligrafia",
+            "Przemysłowe zastosowania informatyki",
+            "Technologia chemiczna",
+            "Telekomunikacja",
+            "Transport",
+            "Zarządzanie",
+            "Zarządzanie i inżynieria produkcji"
+    );
 
     private List<Integer> freeBoothNumbers;
 
@@ -39,6 +82,7 @@ public class SetCompanyFormController {
         model.addAttribute("buttonText", "Dodaj firmę");
         model.addAttribute("company", new Company());
         model.addAttribute("freeBoothNumbers", freeBoothNumbers);
+        model.addAttribute("availableJobTopics", availableJobTopics);
         return "adminview/setCompanyForm";
     }
 
@@ -51,11 +95,17 @@ public class SetCompanyFormController {
             result.rejectValue("websiteUrl", "error.company", "Podany adres strony internetowej jest już wykorzystywany przez inną firmę");
         }
 
+        if (company.getJobTopics().isEmpty()) {
+            result.rejectValue("jobTopics", "error.company", "Musisz wybrać co najmniej jeden kierunek");
+        }
+
         if (result.hasErrors()) {
             model.addAttribute("pageTitle", "Dodaj nową firmę");
             model.addAttribute("actionUrl", "/adminView/addCompany");
             model.addAttribute("buttonText", "Dodaj firmę");
+            model.addAttribute("company", company);
             model.addAttribute("freeBoothNumbers", freeBoothNumbers);
+            model.addAttribute("availableJobTopics", availableJobTopics);
             return "adminview/setCompanyForm";
         }
 
@@ -75,7 +125,6 @@ public class SetCompanyFormController {
                 .boxed()
                 .filter(boothNumber -> !takenBoothNumbers.contains(boothNumber))
                 .collect(Collectors.toList());
-
     }
 
     @GetMapping("/editCompany/{id}")
@@ -91,6 +140,7 @@ public class SetCompanyFormController {
         model.addAttribute("actionUrl", "/adminView/editCompany/" + id + "/confirm");
         model.addAttribute("buttonText", "Aktualizuj dane firmy");
         model.addAttribute("freeBoothNumbers", freeBoothNumbers);
+        model.addAttribute("availableJobTopics", availableJobTopics);
         return "adminview/setCompanyForm";
     }
 
@@ -110,15 +160,21 @@ public class SetCompanyFormController {
             }
         }
 
+        if (company.getJobTopics().isEmpty()) {
+            result.rejectValue("jobTopics", "error.company", "Musisz wybrać co najmniej jeden kierunek");
+        }
+
         if (result.hasErrors()) {
             model.addAttribute("pageTitle", "Edytuj firmę");
             model.addAttribute("actionUrl", "/adminView/editCompany/" + id + "/confirm");
             model.addAttribute("buttonText", "Aktualizuj dane firmy");
+            model.addAttribute("company", company);
             model.addAttribute("freeBoothNumbers", freeBoothNumbers);
+            model.addAttribute("availableJobTopics", availableJobTopics);
             return "adminview/setCompanyForm";
         }
+
         companyRepository.save(company);
         return "redirect:/adminView";
     }
-
 }

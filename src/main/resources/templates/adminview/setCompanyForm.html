@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodaj nową firmę do targów</title>
+    <title>Dodaj nową firmę lub edytuj istniejącą</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,14 +19,14 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .form-group {
-            margin-bottom: 15px;
+            margin: 15px;
         }
         label {
             display: block;
             margin-bottom: 5px;
         }
         input[type="text"],
-        input[type="number"],
+        select,
         button {
             width: 100%;
             padding: 10px;
@@ -39,54 +39,62 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Dodaj nową firmę</h2>
-    <form th:action="@{/addCompany}" method="post">
+    <h2 th:text="${pageTitle}"></h2>
+    <form th:action="@{${actionUrl}}" th:object="${company}" method="post">
         <div class="form-group">
             <label>Nazwa firmy:</label>
-            <input type="text" name="name" required>
+            <input type="text" th:field="*{name}" required>
+            <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></div>
         </div>
         <div class="form-group">
             <label>Adres URL logo:</label>
-            <input type="text" name="logoUrl" required>
+            <input type="text" th:field="*{logoUrl}" required>
         </div>
         <div class="form-group">
             <label>Adres URL dodatkowego zdjęcia:</label>
-            <input type="text" name="imgUrl" required>
+            <input type="text" th:field="*{imgUrl}" required>
         </div>
         <div class="form-group">
             <label>Obszary działania i stanowisk:</label>
-            <input type="text" name="jobTopics" required>
+            <input type="text" th:field="*{jobTopics}" required>
         </div>
         <div class="form-group">
             <label>Numer stanowiska:</label>
-            <input type="number" step="1" name="boothNumber" required>
+            <select th:field="*{boothNumber}" required>
+                <option th:each="boothNumber : ${freeBoothNumbers}" th:value="${boothNumber}" th:text="${boothNumber}"></option>
+            </select>
         </div>
         <div class="form-group">
             <label>Adres strony internetowej:</label>
-            <input type="text" name="websiteUrl" required>
+            <input type="text" th:field="*{websiteUrl}" required>
+            <div th:if="${#fields.hasErrors('websiteUrl')}" class="error" th:errors="*{websiteUrl}"></div>
         </div>
         <div class="form-group">
             <label>Technologie:</label>
-            <input type="text" name="skills" required>
+            <input type="text" th:field="*{skills}" required>
         </div>
         <div class="form-group">
             <label>Krótki opis firmy:</label>
-            <input type="text" name="description" required>
+            <input type="text" th:field="*{description}" required>
         </div>
         <div class="form-group">
             <label>Rozbudowany opis firmy:</label>
-            <input type="text" name="longDescription" required>
+            <input type="text" th:field="*{longDescription}" required>
         </div>
         <div class="form-group">
             <label>Kogo szuka firma:</label>
-            <input type="text" name="whoLookingFor" required>
+            <input type="text" th:field="*{whoLookingFor}" required>
         </div>
-        <button type="submit">Dodaj firmę</button>
+        <button type="submit" th:text="${buttonText}">Dodaj firmę</button>
     </form>
 </div>
 

@@ -3,13 +3,16 @@ package com.group06.JobFairApp;
 import com.group06.JobFairApp.model.Booth;
 import com.group06.JobFairApp.model.Company;
 import com.group06.JobFairApp.model.Workshop;
+import com.group06.JobFairApp.model.Users;
 import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
+import com.group06.JobFairApp.repository.UsersRepository;
 import com.group06.JobFairApp.repository.WorkshopRepository;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +25,18 @@ public class DbInit implements CommandLineRunner {
     private final CompanyRepository companyRepository;
     private final BoothRepository boothRepository;
     private final WorkshopRepository workshopRepository;
+    private final UsersRepository usersRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DbInit(CompanyRepository companyRepository, BoothRepository boothRepository, WorkshopRepository workshopRepository) {
+    public DbInit(CompanyRepository companyRepository, BoothRepository boothRepository,
+                  WorkshopRepository workshopRepository, PasswordEncoder passwordEncoder,
+                  UsersRepository usersRepository) {
         this.companyRepository = companyRepository;
         this.boothRepository = boothRepository;
         this.workshopRepository = workshopRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.usersRepository = usersRepository;
     }
 
     @Override
@@ -42,8 +51,8 @@ public class DbInit implements CommandLineRunner {
         );
 
         List<Workshop> workshops = List.of(
-                new Workshop("Programowanie w języku Python", "5 czerwca 2024", "10:00 - 11:00", "Sala konferencyjna C", "Konrad Karpiuk"),
-                new Workshop("Elektronika analogowa zaawansowana bardziej niż ELA2", "5 czerwca 2024", "11:00 - 12:00", "Sala konferencyjna A", "Piotr Sienkiewicz")
+                new Workshop("Programowanie w języku Python", "2024-05-30", "10:00", "Sala konferencyjna C", "Konrad Karpiuk", 90),
+                new Workshop("Elektronika analogowa zaawansowana bardziej niż ELA2", "2024-06-19", "11:00", "Sala konferencyjna A", "Piotr Sienkiewicz", 45)
         );
 
         // Init booths
@@ -78,6 +87,12 @@ public class DbInit implements CommandLineRunner {
             if (existingWorkshops.stream().noneMatch(existingWorkshop -> existingWorkshop.getTitle().equals(workshop.getTitle()))) {
                 newWorkshops.add(workshop);
             }
+        }
+
+        if (usersRepository.findByEmail("admin") == null) {
+            Users adminUser = new Users("admin", passwordEncoder.encode("wranrostero"),
+                    "Admin", "Admin", "-", "ROLE_ADMIN");
+            usersRepository.save(adminUser);
         }
 
         boothRepository.saveAll(newBooths);

@@ -5,65 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zaloguj się</title>
     <style>
-       body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('https://media.istockphoto.com/id/961452318/pl/zdj%C4%99cie/schemat-in%C5%BCynierii-schemat-papieru-kre%C5%9Blenia-projektu-szkic-architektury-szczeg%C3%B3%C5%82y-rysunku.jpg?s=612x612&w=0&k=20&c=9dyrUSV40aGEXBj-PSUAYGXs05zTCqr4pJ1WBxwnX14=');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100vh;
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://media.istockphoto.com/id/961452318/pl/zdj%C4%99cie/schemat-in%C5%BCynierii-schemat-papieru-kre%C5%9Blenia-projektu-szkic-architektury-szczeg%C3%B3%C5%82y-rysunku.jpg?s=612x612&w=0&k=20&c=9dyrUSV40aGEXBj-PSUAYGXs05zTCqr4pJ1WBxwnX14=');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 100vh;
+        }
 
-h2 {
-    margin-left: 17%;
-}
+        h2 {
+            margin-left: 17%;
+        }
 
-.container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-    border-radius: 3px;
-}
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border-radius: 3px;
+        }
 
-.form-group {
-    margin-bottom: 15px;
-    margin-left: 20%;
-}
+        .form-group {
+            margin-bottom: 15px;
+            margin-left: 20%;
+        }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
+        .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-input[type="text"],
-input[type="number"],
-input[type="password"], /* Dodajemy styl dla input[type="password"] */
-button {
-    width: 65%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 3px;
-}
+        .show-password-icon {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            outline: none;
+            box-shadow: none; /
+        }
 
-button {
-    background-color: rgb(246, 102, 0);
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
-    margin-left: 30%;
-    width: 40%;
-    transition: background-color 0.3s ease, filter 0.3s ease; /* Dodaj efekt przejścia dla zmiany koloru tła i jasności */
-}
+        .show-password-icon img {
+            width: 20px;
+            height: 20px;
+        }
 
-button:hover {
-    filter: brightness(1.5); /* Zwiększ jasność przycisku przy najechaniu */
-}
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="password"],
+        button {
+            width: 65%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: rgb(246, 102, 0);
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 30%;
+            width: 40%;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, filter 0.3s ease;
+        }
+
+        button:hover {
+            filter: brightness(1.5);
+        }
     </style>
 </head>
 <body>
@@ -73,19 +97,32 @@ button:hover {
     <form th:action="@{/login}" method="post">
         <div class="form-group">
             <label>Email:</label>
-            <input type="text" name="username" required>
+            <input type="text" name="username" th:value="${username}" required>
         </div>
         <div class="form-group">
-            <label>Hasło:</label>
-            <input type="password" name="password" required>
+            <label for="password">Hasło:</label>
+            <div class="password-input-container">
+                <input type="password" id="password" name="password" required>
+                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility()">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/visible--v1.png" alt="Pokaż hasło">
+                </button>
+            </div>
         </div>
+
         <div th:if="${param.error}">
-            <p style="color: red; margin-left: 30%;">Nieprawidłowy email lub hasło</p>
+            <p style="color: red; text-align: center">Nieprawidłowy e-mail lub hasło</p>
         </div>
 
         <button type="submit">Zaloguj się</button>
     </form>
 </div>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('password');
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+</script>
 
 </body>
 </html>

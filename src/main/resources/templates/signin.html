@@ -76,29 +76,25 @@
 
         .password-input-container {
             position: relative;
-        }
-
-        .password-input-container {
-            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .show-password-icon {
             position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
+            right: 10px;
             cursor: pointer;
             background: none;
             border: none;
             padding: 0;
+            outline: none;
+            box-shadow: none;
         }
 
         .show-password-icon img {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
         }
-
-
 
     </style>
 </head>
@@ -131,7 +127,7 @@
             <label for="password">Hasło:</label>
             <div class="password-input-container">
                 <input type="password" id="password" name="password" required>
-                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility('password', 'showPassword')">
+                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility('password')">
                     <img src="https://img.icons8.com/material-outlined/24/000000/visible--v1.png" alt="Pokaż hasło">
                 </button>
             </div>
@@ -141,12 +137,11 @@
             <label for="repeatedPassword">Powtórz hasło:</label>
             <div class="password-input-container">
                 <input type="password" id="repeatedPassword" name="repeatedPassword" required>
-                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility('repeatedPassword', 'showRepeatedPassword')">
+                <button type="button" class="show-password-icon" onclick="togglePasswordVisibility('repeatedPassword')">
                     <img src="https://img.icons8.com/material-outlined/24/000000/visible--v1.png" alt="Pokaż hasło">
                 </button>
             </div>
         </div>
-
 
         <button type="submit">Zarejestruj się</button>
     </form>

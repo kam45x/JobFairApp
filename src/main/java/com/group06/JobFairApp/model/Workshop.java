@@ -21,12 +21,14 @@ public class Workshop {
     private String time;
     private String place;
     private String host;
+    private int duration; // Duration in minutes
 
-    public Workshop(String title, String date, String time, String place, String host) {
+    public Workshop(String title, String date, String time, String place, String host, int duration) {
         this.title = title;
         this.date = date;
         this.time = time;
         this.place = place;
         this.host = host;
+        this.duration = duration;
     }
 }

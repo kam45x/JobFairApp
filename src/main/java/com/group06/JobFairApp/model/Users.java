@@ -35,7 +35,7 @@ public class Users implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
-        this.roles = roles;
+        this.roles = roles.startsWith("ROLE_") ? roles : "ROLE_" + roles;
     }
 
     @Override

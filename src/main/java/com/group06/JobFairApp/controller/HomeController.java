@@ -30,6 +30,7 @@ public class HomeController {
     private final FavoriteService favoriteService;
     private FilterForm filterForm;
     private boolean showAll;
+    private boolean favoritesVisible;
 
     @Autowired
     public HomeController(CompanyRepository companyRepository, BoothRepository boothRepository,
@@ -41,6 +42,7 @@ public class HomeController {
         this.filterForm = new FilterForm();
         this.showAll = true;
         this.colorBooths();
+        favoritesVisible = false;
     }
 
     @GetMapping("/")
@@ -95,6 +97,7 @@ public class HomeController {
         model.addAttribute("allJobTopics", allJobTopics);
         model.addAttribute("allSkills", allSkills);
 
+        // Authentication
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             model.addAttribute("user", user);
@@ -108,6 +111,9 @@ public class HomeController {
 
             System.out.println("Authenticated is false");
         }
+
+        // Favorites list visibility
+        model.addAttribute("favoritesVisible", favoritesVisible);
 
         return "home";
     }

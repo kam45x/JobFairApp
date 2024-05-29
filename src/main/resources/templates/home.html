@@ -55,8 +55,8 @@
     <div th:if="${not authenticated}">
         <p>Zaloguj się, aby otrzymać nowe możliwości</p>
         <div class="header-buttons">
-            <a th:href="@{/login}"><button>Zaloguj się</button></a>
-            <a th:href="@{/signin}"><button>Zarejestruj się</button></a>
+            <a th:href="@{/login}"><button id="newbutton">Zaloguj się</button></a>
+            <a th:href="@{/signin}"><button id="newbutton">Zarejestruj się</button></a>
         </div>
     </div>
     <div th:if="${authenticated}">
@@ -66,10 +66,10 @@
         <div th:if="${not isAdmin}">
             <p><span th:text="${user.name}">Użytkowniku</span>, pokaż dominację nad studentami UW i znajdź dobrze płatną pracę w zawodzie</p>
         </div>
-        <a th:href="@{/logout}"><button>Wyloguj się</button></a>
+        <a th:href="@{/logout}"><button id="newbutton">Wyloguj się</button></a>
         <div th:if="${not isAdmin}">
             <div class="header-buttons">
-                <button onclick="toggleFavorites()">❤️ Ulubione</button>
+                <button onclick="toggleFavorites()" id="newbutton">❤️ Ulubione</button>
                 <div id="favoritesContainer" style="display: none;">
                     <table>
                         <tbody>

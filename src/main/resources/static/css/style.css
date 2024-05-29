@@ -373,3 +373,15 @@ header {
 #toggleFiltersButton:hover {
     background-color: #45a049; /* Ciemniejszy kolor tła */
 }
+
+#newbutton {
+
+
+    z-index: 999; /* Ustawienie z-index na wysoką wartość, aby przycisk był na wierzchu */
+    background-color: #7a6fb3;
+    color: #fff;
+    padding: 3px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

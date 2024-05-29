@@ -168,7 +168,7 @@ header {
 
 }
 .container_who1 {
-    width: 100%;
+    width: 87%;
     padding: 25px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -212,7 +212,7 @@ header {
     background-color: #ffffff; /* Kolor tła kontenera */
     position: absolute;
     top: 600px;
-    left: 220px;
+    left: 250px;
 
 }
 

@@ -1,11 +1,15 @@
 ## Prace podczas III etapu
 
 ### Kamil Cisek
-* Zmiana bazy danych H2 na bazę danych PostgreSQL,
-* dodanie możliwości filtrowania firm po kierunkach i technologiach,
-* dodanie funkcjonalności kolorowania stanowisk zależnie od wybranych filtrów,
-* stworzenie formularza dodawania prelekcji,
-* naprawienie wyświetlania podpisów stoisk.
+1. Zmiana bazy danych H2 na bazę danych PostgreSQL. Jest to duże usprawnienie, ponieważ baza H2 jest 
+bazą pamięciową i zapomina zapisane dane wraz z wyłączeniem aplikacji. Baza PostgreSQL umożliwia trwałe przechowywanie danych.
+Do połączenia aplikacji z bazą danych są wykorzystywane możliwości Spring Boota i JDBC.
+2. Dodanie możliwości filtrowania firm po kierunkach i technologiach. Firma wyświetla się jeśli przynajmniej jeden z jej
+obszarów działania spełnia ten zaznaczony w filtrach. Dodano także przycisk, który umożliwia wyświetlanie wszystkich firm.
+3. Dodanie funkcjonalności kolorowania stanowisk zależnie od wybranych filtrów. Kolor stanowiska firmy jest zależny od tego,
+jak wiele technologii zaznaczonych w filtrach pasuje do technologii mile widzianych przez firmę. Im więcej tym ciemniejsz odcień zielonego.
+4. Stworzenie formularza dodawania prelekcji. Stworzony podobnie jak formularz dodawania firm.
+5. Naprawienie wyświetlania podpisów stoisk. Wcześniej po dodaniu firmy z formularza podpis stoiska nie wyświetlał się.
 
 ### Katarzyna Wójtowicz
 * Stworzenie frontendu strony rejestracji,

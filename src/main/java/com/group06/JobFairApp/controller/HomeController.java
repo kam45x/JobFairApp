@@ -7,6 +7,7 @@ import com.group06.JobFairApp.model.Users;
 import com.group06.JobFairApp.repository.BoothRepository;
 import com.group06.JobFairApp.repository.CompanyRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
+import com.group06.JobFairApp.service.FavoriteService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.*;
@@ -25,15 +27,17 @@ public class HomeController {
     private final CompanyRepository companyRepository;
     private final BoothRepository boothRepository;
     private final AuthenticationService authenticationService;
+    private final FavoriteService favoriteService;
     private FilterForm filterForm;
     private boolean showAll;
 
     @Autowired
     public HomeController(CompanyRepository companyRepository, BoothRepository boothRepository,
-                          AuthenticationService authenticationService) {
+                          AuthenticationService authenticationService, FavoriteService favoriteService) {
         this.companyRepository = companyRepository;
         this.boothRepository = boothRepository;
         this.authenticationService = authenticationService;
+        this.favoriteService = favoriteService;
         this.filterForm = new FilterForm();
         this.showAll = true;
         this.colorBooths();
@@ -139,6 +143,13 @@ public class HomeController {
     @GetMapping("/showAll")
     public String showAllCompanies(Model model) {
         this.showAll = true;
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/remove/{companyId}")
+    public String removeCompany(@PathVariable Long companyId) {
+        favoriteService.removeFavoriteFromAuthenticatedUser(companyId);
 
         return "redirect:/";
     }

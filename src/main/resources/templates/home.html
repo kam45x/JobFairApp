@@ -26,14 +26,23 @@
         <div class="header-buttons">
             <button onclick="toggleFavorites()">❤️ Ulubione</button>
             <div id="favoritesContainer" style="display: none;">
-                <ul>
-                    <li th:each="favoriteCompany : ${favoriteCompanies}">
-                        <a th:href="@{/company/page/{id}(id=${favoriteCompany.id})}">
-                            <img th:src="@{${favoriteCompany.logoUrl}}" alt="Logo" class="small-logo">
-                            <span th:text="${favoriteCompany.name}"></span>
-                        </a>
-                    </li>
-                </ul>
+<!--                <ul>-->
+<!--                    <li th:each="favoriteCompany : ${favoriteCompanies}">-->
+<!--                        <a th:href="@{/company/page/{id}(id=${favoriteCompany.id})}">-->
+<!--                            <img th:src="@{${favoriteCompany.logoUrl}}" alt="Logo" class="small-logo">-->
+<!--                            <span th:text="${favoriteCompany.name}"></span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+                <table>
+                    <tbody>
+                    <tr th:each="company : ${favoriteCompanies}">
+                        <td><img th:src="@{${company.logoUrl}}" alt="Logo" class="small-logo"></td>
+                        <td th:text="${company.name}"></td>
+                        <td><a th:href="@{/remove/{id}(id=${company.id})}"><button>Usuń z ulubionych</button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

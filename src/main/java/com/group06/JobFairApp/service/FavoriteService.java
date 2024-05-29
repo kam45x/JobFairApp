@@ -1,4 +1,4 @@
-package com.group06.JobFairApp.controller;
+package com.group06.JobFairApp.service;
 
 import com.group06.JobFairApp.model.Company;
 import com.group06.JobFairApp.model.Users;
@@ -7,28 +7,22 @@ import com.group06.JobFairApp.repository.UsersRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/favorites")
-public class FavoritesController {
-
-    private final AuthenticationService authenticationService;
+public class FavoriteService {
     private final CompanyRepository companyRepository;
     private final UsersRepository usersRepository;
+    private final AuthenticationService authenticationService;
 
     @Autowired
-    public FavoritesController(AuthenticationService authenticationService,
-                               CompanyRepository companyRepository, UsersRepository usersRepository) {
-        this.authenticationService = authenticationService;
+    public FavoriteService(CompanyRepository companyRepository,
+                           UsersRepository usersRepository, AuthenticationService authenticationService) {
         this.companyRepository = companyRepository;
         this.usersRepository = usersRepository;
+        this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/add/{companyId}")
-    public String addFavorite(@PathVariable Long companyId) {
+    public void addFavoriteToAuthenticatedUser(Long companyId) {
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             Company company = companyRepository.findById(companyId).orElse(null);
@@ -37,11 +31,9 @@ public class FavoritesController {
                 usersRepository.save(user);
             }
         }
-        return "redirect:/company/page/" + companyId;
     }
 
-    @PostMapping("/remove/{companyId}")
-    public String removeFavorite(@PathVariable Long companyId) {
+    public void removeFavoriteFromAuthenticatedUser(Long companyId) {
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             Company company = companyRepository.findById(companyId).orElse(null);
@@ -50,6 +42,5 @@ public class FavoritesController {
                 usersRepository.save(user);
             }
         }
-        return "redirect:/company/page/" + companyId;
     }
 }

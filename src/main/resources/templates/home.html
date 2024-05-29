@@ -168,14 +168,20 @@
 
     function toggleFavorites() {
         var favoritesContainer = document.getElementById("favoritesContainer");
-        if (favoritesContainer.style.display === "none") {
-            favoritesContainer.style.display = "block";
-        } else {
-            favoritesContainer.style.display = "none";
-        }
+        var currentState = favoritesContainer.style.display;
+        var newFavoritesVisible = (currentState === "block") ? "none" : "block";
+        favoritesContainer.style.display = newFavoritesVisible;
+
+        localStorage.setItem('favoritesVisible', newFavoritesVisible);
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var favoritesVisible = localStorage.getItem('favoritesVisible');
+        if (favoritesVisible) {
+            var favoritesContainer = document.getElementById("favoritesContainer");
+            favoritesContainer.style.display = favoritesVisible;
+        }
+    });
 </script>
-
-
 </body>
 </html>

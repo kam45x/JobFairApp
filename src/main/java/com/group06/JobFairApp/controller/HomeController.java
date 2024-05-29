@@ -30,7 +30,7 @@ public class HomeController {
     private final FavoriteService favoriteService;
     private FilterForm filterForm;
     private boolean showAll;
-    private boolean favoritesVisible;
+    private String favoritesVisible;
 
     @Autowired
     public HomeController(CompanyRepository companyRepository, BoothRepository boothRepository,
@@ -42,7 +42,7 @@ public class HomeController {
         this.filterForm = new FilterForm();
         this.showAll = true;
         this.colorBooths();
-        favoritesVisible = false;
+        favoritesVisible = "none";
     }
 
     @GetMapping("/")
@@ -103,7 +103,10 @@ public class HomeController {
             model.addAttribute("user", user);
             model.addAttribute("authenticated", true);
             model.addAttribute("isAdmin", user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
-            model.addAttribute("favoriteCompanies", user.getFavoriteCompanies());
+
+            List<Company> favoriteCompanies = new ArrayList<>(user.getFavoriteCompanies());
+            favoriteCompanies.sort(Comparator.comparing(Company::getName));
+            model.addAttribute("favoriteCompanies", favoriteCompanies);
 
             System.out.println("User " + user.getName() + " with email " + user.getEmail() + " is authenticated");
         } else {

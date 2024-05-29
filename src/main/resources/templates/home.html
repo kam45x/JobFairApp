@@ -67,22 +67,24 @@
             <p><span th:text="${user.name}">Użytkowniku</span>, pokaż dominację nad studentami UW i znajdź dobrze płatną pracę w zawodzie</p>
         </div>
         <a th:href="@{/logout}"><button>Wyloguj się</button></a>
-        <div class="header-buttons">
-            <button onclick="toggleFavorites()">❤️ Ulubione</button>
-            <div id="favoritesContainer" style="display: none;">
-                <table>
-                    <tbody>
-                    <tr th:each="company : ${favoriteCompanies}">
-                        <td><img th:src="@{${company.logoUrl}}" alt="Logo" class="small-logo"></td>
-                        <td><a th:href="@{'/company/page/' + ${company.id}}" th:text="${company.name}"></a></td>
-                        <td>
-                            <form th:action="@{'/remove/' + ${company.id}}" method="post">
-                                <button type="submit">Usuń z ulubionych</button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div th:if="${not isAdmin}">
+            <div class="header-buttons">
+                <button onclick="toggleFavorites()">❤️ Ulubione</button>
+                <div id="favoritesContainer" style="display: none;">
+                    <table>
+                        <tbody>
+                        <tr th:each="company : ${favoriteCompanies}">
+                            <td><img th:src="@{${company.logoUrl}}" alt="Logo" class="small-logo"></td>
+                            <td><a th:href="@{'/company/page/' + ${company.id}}" th:text="${company.name}"></a></td>
+                            <td>
+                                <form th:action="@{'/remove/' + ${company.id}}" method="post">
+                                    <button type="submit">Usuń z ulubionych</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

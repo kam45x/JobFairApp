@@ -104,7 +104,7 @@ public class HomeController {
             model.addAttribute("authenticated", true);
             model.addAttribute("isAdmin", user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
 
-            List<Company> favoriteCompanies = new ArrayList<>(user.getFavoriteCompanies());
+            List<Company> favoriteCompanies = favoriteService.getFavoriteCompaniesListFromAuthenticatedUser();
             favoriteCompanies.sort(Comparator.comparing(Company::getName));
             model.addAttribute("favoriteCompanies", favoriteCompanies);
 

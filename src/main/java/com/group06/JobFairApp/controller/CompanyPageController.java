@@ -41,7 +41,7 @@ public class CompanyPageController {
             if (user != null) {
                 model.addAttribute("authenticated", true);
                 model.addAttribute("isAdmin", user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
-                model.addAttribute("isFavorite", user.getFavoriteCompanies().contains(company));
+                model.addAttribute("isFavorite", user.getFavoritesCompaniesIdList().contains(id));
             } else {
                 model.addAttribute("authenticated", false);
             }

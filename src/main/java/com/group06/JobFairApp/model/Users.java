@@ -6,10 +6,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -31,13 +31,8 @@ public class Users implements UserDetails {
     private String phoneNumber;
     private String roles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_favorites",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "company_id")
-    )
-    private Set<Company> favoriteCompanies = new HashSet<>();
+    @Column(columnDefinition = "TEXT")
+    private String favoritesCompaniesIdString = "";
 
     public Users(String email, String password, String name, String surname, String phoneNumber, String roles) {
         this.email = email;
@@ -46,6 +41,7 @@ public class Users implements UserDetails {
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.roles = roles.startsWith("ROLE_") ? roles : "ROLE_" + roles;
+        this.favoritesCompaniesIdString = "";
     }
 
     @Override
@@ -78,11 +74,44 @@ public class Users implements UserDetails {
         return true;
     }
 
-    public void addFavoriteCompany(Company company) {
-        this.favoriteCompanies.add(company);
+    public void addFavoriteCompanyById(Long companyId) {
+        if (favoritesCompaniesIdString == null || favoritesCompaniesIdString.isEmpty()) {
+            favoritesCompaniesIdString = companyId.toString();
+        } else {
+            favoritesCompaniesIdString += "," + companyId.toString();
+        }
     }
 
-    public void removeFavoriteCompany(Company company) {
-        this.favoriteCompanies.remove(company);
+    public void removeFavoriteCompanyById(Long companyId) {
+        if (favoritesCompaniesIdString != null && !favoritesCompaniesIdString.isEmpty()) {
+            String companyIdString = String.valueOf(companyId);
+            String[] parts = favoritesCompaniesIdString.split(",");
+            StringBuilder temporaryFavoritesCompaniesIDs = new StringBuilder();
+
+            for (String part : parts) {
+                if (!part.equals(companyIdString)) {
+                    if (!temporaryFavoritesCompaniesIDs.isEmpty()) {
+                        temporaryFavoritesCompaniesIDs.append(",");
+                    }
+                    temporaryFavoritesCompaniesIDs.append(part);
+                }
+            }
+
+            favoritesCompaniesIdString = temporaryFavoritesCompaniesIDs.toString();
+        }
+    }
+
+    public List<Long> getFavoritesCompaniesIdList() {
+        List<Long> favoritesCompaniesIds = new ArrayList<>();
+
+        if (favoritesCompaniesIdString != null && !favoritesCompaniesIdString.isEmpty()) {
+            String[] parts = favoritesCompaniesIdString.split(",");
+
+            for (String part : parts) {
+                favoritesCompaniesIds.add(Long.parseLong(part.trim()));
+            }
+        }
+
+        return favoritesCompaniesIds;
     }
 }

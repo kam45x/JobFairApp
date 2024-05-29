@@ -19,5 +19,8 @@ Z06
 ## Drugi etap projektu - działający prototyp
 [Dokumentacja II etapu](docs/II_etap.md)
 
+### Trzeci etap projektu - działająca aplikacja
+[Dokumentacja III etapu](docs/III_etap.md)
+
 ## Dokumentacja - inne
 [Tworzenia bazy danych PostgreSQL](docs/BazaDanych.md)

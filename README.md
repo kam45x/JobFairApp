@@ -24,3 +24,27 @@ Z06
 
 ## Dokumentacja - inne
 [Tworzenia bazy danych PostgreSQL](docs/BazaDanych.md)
+
+## Proces uruchomienia aplikacji
+Na repozytorium znajdują się tylko pliki źródłowe aplikacji, a nie pliki `.jar`, stąd też aplikacja przed uruchomieniem
+wymaga zbudowania. Najprościej wykonać to z poziomu środowiska programistycznego IDE. Jednak nie jest ono konieczne,
+albowiem wszystkie wymagane operacje można wykonać z poziomu terminala. W przypadku systemu operacyjnego Ubuntu proces
+wygląda następująco:
+
+### Budowanie aplikacji
+Aplikacja korzysta z narzędzia do zarządzania pakietami Maven, stąd też wymagane jest jego wcześniejsze zainstalowanie 
+na używanym komputerze. Poniższa komenda przeprowadza proces kompilacji:
+```
+mvn clean install
+```
+
+### Wykonanie programu
+Poprzednia komenda tworzy katalog `target`, a w nim plik wykonywalny w formacie `.jar`. Należy go wykonać za pomocą 
+zainstalowanego na komputerze interpretera Javy:
+```
+java -jar target/JobFairApp-0.0.1-SNAPSHOT.jar
+```
+
+### Wyłączenie aplikacji
+Aplikację można wyłączyć na przykład używając skrótu `Ctrl+C`, bądź szukając nazwy aplikacji wśród uruchomionych
+procesów i wywołując na nim komendę `kill`

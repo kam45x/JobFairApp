@@ -6,17 +6,19 @@ import com.group06.JobFairApp.repository.CompanyRepository;
 import com.group06.JobFairApp.repository.UsersRepository;
 import com.group06.JobFairApp.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
-@Controller
+@Service
 public class FavoriteService {
+
     private final CompanyRepository companyRepository;
     private final UsersRepository usersRepository;
     private final AuthenticationService authenticationService;
 
     @Autowired
     public FavoriteService(CompanyRepository companyRepository,
-                           UsersRepository usersRepository, AuthenticationService authenticationService) {
+                           UsersRepository usersRepository,
+                           AuthenticationService authenticationService) {
         this.companyRepository = companyRepository;
         this.usersRepository = usersRepository;
         this.authenticationService = authenticationService;
@@ -26,7 +28,7 @@ public class FavoriteService {
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             Company company = companyRepository.findById(companyId).orElse(null);
-            if (company != null) {
+            if (company != null && !user.getFavoriteCompanies().contains(company)) {
                 user.addFavoriteCompany(company);
                 usersRepository.save(user);
             }
@@ -37,7 +39,7 @@ public class FavoriteService {
         Users user = authenticationService.getAuthenticatedUser();
         if (user != null) {
             Company company = companyRepository.findById(companyId).orElse(null);
-            if (company != null) {
+            if (company != null && user.getFavoriteCompanies().contains(company)) {
                 user.removeFavoriteCompany(company);
                 usersRepository.save(user);
             }

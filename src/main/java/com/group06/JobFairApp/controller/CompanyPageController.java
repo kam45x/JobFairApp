@@ -23,7 +23,8 @@ public class CompanyPageController {
     private final FavoriteService favoriteService;
 
     @Autowired
-    public CompanyPageController(CompanyRepository companyRepository, AuthenticationService authenticationService,
+    public CompanyPageController(CompanyRepository companyRepository,
+                                 AuthenticationService authenticationService,
                                  FavoriteService favoriteService) {
         this.companyRepository = companyRepository;
         this.authenticationService = authenticationService;
@@ -31,8 +32,7 @@ public class CompanyPageController {
     }
 
     @GetMapping("/page/{id}")
-    public String showCompanyPage(@PathVariable("id") Long id, Model model)
-    {
+    public String showCompanyPage(@PathVariable("id") Long id, Model model) {
         Company company = companyRepository.findById(id).orElse(null);
         if (company != null) {
             model.addAttribute("page_company", company);
@@ -45,6 +45,8 @@ public class CompanyPageController {
             } else {
                 model.addAttribute("authenticated", false);
             }
+        } else {
+            return "redirect:/";
         }
         return "companyPage";
     }

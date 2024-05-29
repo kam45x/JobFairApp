@@ -20,26 +20,21 @@
             <p>Zalogowano jako administrator</p>
         </div>
         <div th:if="${not isAdmin}">
-            <p><span th:text="${user.name}">Użytkowniku</span>, pokaż dominację nad UW i znajdź dobrze płatną pracę w zawodzie</p>
+            <p><span th:text="${user.name}">Użytkowniku</span>, pokaż dominację nad studentami UW i znajdź dobrze płatną pracę w zawodzie</p>
         </div>
         <a th:href="@{/logout}"><button>Wyloguj się</button></a>
         <div class="header-buttons">
             <button onclick="toggleFavorites()">❤️ Ulubione</button>
             <div id="favoritesContainer" style="display: none;">
-<!--                <ul>-->
-<!--                    <li th:each="favoriteCompany : ${favoriteCompanies}">-->
-<!--                        <a th:href="@{/company/page/{id}(id=${favoriteCompany.id})}">-->
-<!--                            <img th:src="@{${favoriteCompany.logoUrl}}" alt="Logo" class="small-logo">-->
-<!--                            <span th:text="${favoriteCompany.name}"></span>-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                </ul>-->
                 <table>
                     <tbody>
                     <tr th:each="company : ${favoriteCompanies}">
                         <td><img th:src="@{${company.logoUrl}}" alt="Logo" class="small-logo"></td>
                         <td th:text="${company.name}"></td>
-                        <td><a th:href="@{/remove/{id}(id=${company.id})}"><button>Usuń z ulubionych</button></a></td>
+                        <td><a th:href="@{'/company/page/' + ${company.id}}"><button>Przejdź do firmy</button></a></td>
+                        <form th:action="@{'/remove/' + ${company.id}}" method="post">
+                            <button type="submit">Usuń z ulubionych</button>
+                        </form>
                     </tr>
                     </tbody>
                 </table>

@@ -74,6 +74,7 @@ public class HomeController {
         // Filter form
         model.addAttribute("filterForm", filterForm);
         model.addAttribute("selectedFilters", filterForm.getSelectedFilters());
+        model.addAttribute("selectedName", filterForm.getSelectedName());
 
         // All filters
         List<String> allJobTopics = new ArrayList<>();
@@ -167,7 +168,7 @@ public class HomeController {
         List<Booth> booths = boothRepository.findAll();
         for (Company company : companyRepository.findAll()) {
             Optional<Booth> boothOptional = booths.stream().filter(booth -> booth.getBoothNumber() == company.getBoothNumber()).findFirst();
-            if (company.shouldBeShowed(filterForm.getSelectedFilters(), false) && !this.showAll) {
+            if (company.shouldBeShowed(filterForm.getSelectedFilters(), filterForm.getSelectedName(), false) && !this.showAll) {
                 double matchedSkills = company.matchedSkills(filterForm.getSelectedFilters());
                 if (matchedSkills < 0.1) {
                     boothOptional.ifPresent(booth -> booth.setColorByName("green1"));

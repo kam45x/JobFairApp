@@ -8,4 +8,5 @@ import java.util.List;
 @Setter
 public class FilterForm {
     private List<String> selectedFilters;
+    private String selectedName;
 }

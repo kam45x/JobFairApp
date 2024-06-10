@@ -51,7 +51,7 @@ public class Company {
         this.skills = skills;
     }
 
-    public boolean shouldBeShowed(List<String> filters, boolean showAll) {
+    public boolean shouldBeShowed(List<String> filters, String requestedName, boolean showAll) {
         if (showAll) {
             return true;
         }
@@ -59,8 +59,15 @@ public class Company {
             return false;
         }
 
-        String[] companyjobTopics = this.jobTopics.split(", ");
+        // Check if matches requested name of company
+        if (!requestedName.isEmpty()) {
+            if (!this.name.toLowerCase().contains(requestedName.toLowerCase())) {
+                return false;
+            }
+        }
 
+        // Check if matches job topics
+        String[] companyjobTopics = this.jobTopics.split(", ");
         for (String topic : companyjobTopics) {
             if (filters.contains("F1 " + topic)) {
                 return true;

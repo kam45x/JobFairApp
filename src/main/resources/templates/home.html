@@ -12,8 +12,8 @@
     <div th:if="${not authenticated}">
         <p>Zaloguj się, aby otrzymać nowe możliwości</p>
         <div class="header-buttons">
-            <a th:href="@{/login}"><button id="newbutton">Zaloguj się</button></a>
-            <a th:href="@{/signin}"><button id="newbutton">Zarejestruj się</button></a>
+            <a th:href="@{/login}"><button id="newbutton1">Zaloguj się</button></a>
+            <a th:href="@{/signin}"><button id="newbutton2">Zarejestruj się</button></a>
         </div>
     </div>
     <div th:if="${authenticated}">
@@ -23,10 +23,10 @@
         <div th:if="${not isAdmin}">
             <p><span th:text="${user.name}">Użytkowniku</span>, pokaż dominację nad studentami UW i znajdź dobrze płatną pracę w zawodzie</p>
         </div>
-        <a th:href="@{/logout}"><button id="newbutton">Wyloguj się</button></a>
+        <a th:href="@{/logout}"><button id="newbutton3">Wyloguj się</button></a>
         <div th:if="${not isAdmin}">
             <div class="header-buttons">
-                <button onclick="toggleFavorites()" id="newbutton">❤️ Ulubione</button>
+                <button onclick="toggleFavorites()" id="newbutton4">❤️ Ulubione</button>
                 <div id="favoritesContainer" style="display: none;">
                     <table>
                         <tbody>
@@ -66,20 +66,22 @@
     <button id="toggleFiltersButton" onclick="toggleFilters()">Wybierz filtry</button>
     <div class="filters" id="topicsContainer" style="display: none;">
         <form th:action="@{/applyFilters}" th:object="${filterForm}" method="post">
-            <p>Kierunki studiów</p>
+            <p><strong>Kierunki studiów</strong></p>
             <div th:each="jobTopic : ${allJobTopics}">
                 <input type="checkbox" th:field="*{selectedFilters}" th:value="'F1 ' + ${jobTopic}" th:id="${jobTopic}" name="filter">
                 <label th:for="${jobTopic}" th:text="${jobTopic}"></label>
             </div>
-            <p>Technologie</p>
+            <p><strong>Technologie</strong></p>
             <div th:each="skill : ${allSkills}">
                 <input type="checkbox" th:field="*{selectedFilters}" th:value="'F2 ' + ${skill}" th:id="${skill}" name="filter">
                 <label th:for="${skill}" th:text="${skill}"></label>
             </div>
+            <p><strong>Nazwa firmy</strong></p>
+            <input type="text" th:field="*{selectedName}" id="company_name" name="company_name"><br><br>
             <button type="submit" id="applyFilters">Zastosuj filtry</button>
         </form>
     </div>
-    <div class="company" th:each="company : ${companies}" th:if="${company.shouldBeShowed(selectedFilters, showAll)}">
+    <div class="company" th:each="company : ${companies}" th:if="${company.shouldBeShowed(selectedFilters, selectedName, showAll)}">
         <div class="company-details">
             <h2 th:text="${company.name}"></h2>
             <img th:src="@{${company.getLogoUrl}}" class="center">

@@ -31,7 +31,7 @@ public class Booth {
     }
 
     public Booth(int boothNumber) {
-        this(boothNumber, "Puste stoisko", "#ddd");
+        this(boothNumber, "-", "#ddd");
     }
 
     public void setColorByName(String colorName) {
@@ -49,7 +49,7 @@ public class Booth {
                 this.color = "#ddd";
                 break;
             case "dimGray":
-                this.color = "#696969";
+                this.color = "#B8B5B5";
                 break;
         }
     }

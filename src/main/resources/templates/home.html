@@ -8,6 +8,8 @@
 
 </head>
 <body>
+
+<!--Header-->
 <header>
     <div th:if="${not authenticated}">
         <p>Zaloguj się, aby otrzymać nowe możliwości</p>
@@ -47,18 +49,23 @@
     </div>
     <h1>Targi pracy</h1>
 </header>
+
+<!--Workshops button-->
 <a th:href="@{/workshops/page}">
     <button id="floatingButton">Zobacz plan warsztatów</button>
 </a>
 
+<!--Booths-->
 <div class="container">
     <h2 class="section-title">Mapa targów</h2>
     <div class="map">
-        <div class="booth" th:each="booth : ${booths}" th:text="${booth.boothNumber}" th:attr="data-tooltip=${booth.companyName}"
+        <div class="booth" th:each="booth : ${booths}" th:text="${booth.companyName}" th:attr="data-tooltip=${booth.boothNumber}"
              th:style="'background-color:' + ${booth.color}"></div>
     </div>
 </div>
+
 <div class="container">
+    <!--Filters-->
     <h2 class="section-title">Lista firm</h2>
     <div class="btn-container">
         <a th:href="@{'/showAll'}" class="btn">Pokaż wszystkie firmy</a>
@@ -81,6 +88,7 @@
             <button type="submit" id="applyFilters">Zastosuj filtry</button>
         </form>
     </div>
+<!--    Companies-->
     <div class="company" th:each="company : ${companies}" th:if="${company.shouldBeShowed(selectedFilters, selectedName, showAll)}">
         <div class="company-details">
             <h2 th:text="${company.name}"></h2>
@@ -104,6 +112,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function toggleFilters() {
         var filtersContainer1 = document.getElementById("topicsContainer");

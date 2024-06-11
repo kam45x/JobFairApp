@@ -104,25 +104,39 @@ header {
     text-align: center; /* Dodanie wyśrodkowania tekstu */
 }
 
-
 .booth:hover {
     background-color: #ccc; /* zmieniony kolor podczas najechania na stoisko */
 }
+
 .booth:hover::before {
     content: attr(data-tooltip);
     position: absolute;
-    top: 50%; /* Ustawienie górnego marginesu na 50% */
+    top: -30px; /* Przesunięcie do góry o 30px */
     left: 50%;
+    transform: translateX(-50%);
     padding: 5px;
     background-color: #333;
     color: #fff;
     border-radius: 5px;
     font-size: 12px;
     white-space: nowrap;
-    transform: translateX(-50%);
-    /* Ustawienie marginesu górnego na - połowę wysokości tooltipu */
-    margin-top: -12px; /* Połowa wysokości tooltipu (12px) */
 }
+
+/*.booth:hover::before {*/
+/*    content: attr(data-tooltip);*/
+/*    position: absolute;*/
+/*    top: 50%; !* Ustawienie górnego marginesu na 50% *!*/
+/*    left: 50%;*/
+/*    padding: 5px;*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    border-radius: 5px;*/
+/*    font-size: 12px;*/
+/*    white-space: nowrap;*/
+/*    transform: translateX(-50%);*/
+/*    !* Ustawienie marginesu górnego na - połowę wysokości tooltipu *!*/
+/*    margin-top: -12px; !* Połowa wysokości tooltipu (12px) *!*/
+/*}*/
 
 
 

@@ -65,6 +65,20 @@ public class SetCompanyFormController {
             "Zarządzanie i inżynieria produkcji"
     );
 
+    private final List<String> availableSkills = Arrays.asList(
+            "Python",
+            "C",
+            "C++",
+            "Java",
+            "JavaScript",
+            "ST",
+            "Ladder",
+            "ROS",
+            "SCADA",
+            "Matlab",
+            "Simulink"
+    );
+
     private List<Integer> freeBoothNumbers;
 
     @Autowired
@@ -83,6 +97,7 @@ public class SetCompanyFormController {
         model.addAttribute("company", new Company());
         model.addAttribute("freeBoothNumbers", freeBoothNumbers);
         model.addAttribute("availableJobTopics", availableJobTopics);
+        model.addAttribute("availableSkills", availableSkills);
         return "adminview/setCompanyForm";
     }
 
@@ -106,6 +121,7 @@ public class SetCompanyFormController {
             model.addAttribute("company", company);
             model.addAttribute("freeBoothNumbers", freeBoothNumbers);
             model.addAttribute("availableJobTopics", availableJobTopics);
+            model.addAttribute("availableSkills", availableSkills);
             return "adminview/setCompanyForm";
         }
 
@@ -141,6 +157,7 @@ public class SetCompanyFormController {
         model.addAttribute("buttonText", "Aktualizuj dane firmy");
         model.addAttribute("freeBoothNumbers", freeBoothNumbers);
         model.addAttribute("availableJobTopics", availableJobTopics);
+        model.addAttribute("availableSkills", availableSkills);
         return "adminview/setCompanyForm";
     }
 
@@ -171,6 +188,7 @@ public class SetCompanyFormController {
             model.addAttribute("company", company);
             model.addAttribute("freeBoothNumbers", freeBoothNumbers);
             model.addAttribute("availableJobTopics", availableJobTopics);
+            model.addAttribute("availableSkills", availableSkills);
             return "adminview/setCompanyForm";
         }
 

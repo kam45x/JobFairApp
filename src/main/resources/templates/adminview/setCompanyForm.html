@@ -99,7 +99,7 @@
         <div class="form-group">
             <label>Obszary działania i stanowisk:</label>
             <div class="dropdown">
-                <input type="text" id="jobTopicsInput" onclick="toggleDropdown()" readonly placeholder="Wybierz obszary">
+                <input type="text" id="jobTopicsInput" onclick="toggleDropdownJobTopics()" readonly placeholder="Wybierz obszary">
                 <div id="jobTopicsDropdown" class="dropdown-content">
                     <option th:each="jobTopic : ${availableJobTopics}" th:value="${jobTopic}" th:text="${jobTopic}" onclick="selectJobTopic(this)"></option>
                 </div>
@@ -120,10 +120,21 @@
             <input type="text" th:field="*{websiteUrl}" required>
             <div th:if="${#fields.hasErrors('websiteUrl')}" class="error" th:errors="*{websiteUrl}"></div>
         </div>
+
         <div class="form-group">
             <label>Technologie:</label>
-            <input type="text" th:field="*{skills}" required>
+            <div class="dropdown">
+                <input type="text" id="skillsInput" onclick="toggleDropdownSkills()" readonly placeholder="Wybierz technologie">
+                <div id="skillsDropdown" class="dropdown-content">
+                    <option th:each="skill : ${availableSkills}" th:value="${skill}" th:text="${skill}" onclick="selectSkill(this)"></option>
+                </div>
+            </div>
+            <div id="selectedSkills" class="tags"></div>
+            <input type="hidden" id="skills" th:field="*{skills}" required>
+            <div th:if="${#fields.hasErrors('skills')}" class="error" th:errors="*{skills}"></div>
+            <div id="skillsError" class="error" style="display: none;">Musisz wybrać co najmniej jedną opcję.</div>
         </div>
+
         <div class="form-group">
             <label>Krótki opis firmy:</label>
             <input type="text" th:field="*{description}" required>
@@ -154,8 +165,26 @@
         });
     });
 
-    function toggleDropdown() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const skillsInput = document.getElementById('skills');
+        const selectedValues = skillsInput.value ? skillsInput.value.split(', ') : [];
+        const selectedSkills = document.getElementById('selectedSkills');
+
+        selectedValues.forEach(value => {
+            const tag = document.createElement('span');
+            tag.className = 'tag';
+            tag.innerHTML = `${value} <span class="remove-tag" onclick="removeSkill(this, '${value}')">&times;</span>`;
+            selectedSkills.appendChild(tag);
+        });
+    });
+
+    function toggleDropdownJobTopics() {
         const dropdown = document.getElementById('jobTopicsDropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function toggleDropdownSkills() {
+        const dropdown = document.getElementById('skillsDropdown');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
 
@@ -172,7 +201,23 @@
             tag.innerHTML = `${option.value} <span class="remove-tag" onclick="removeJobTopic(this, '${option.value}')">&times;</span>`;
             selectedJobTopics.appendChild(tag);
         }
-        toggleDropdown();
+        toggleDropdownJobTopics();
+    }
+
+    function selectSkill(option) {
+        const skillsInput = document.getElementById('skills');
+        const selectedValues = skillsInput.value ? skillsInput.value.split(', ') : [];
+        if (!selectedValues.includes(option.value)) {
+            selectedValues.push(option.value);
+            skillsInput.value = selectedValues.join(', ');
+
+            const selectedSkills = document.getElementById('selectedSkills');
+            const tag = document.createElement('span');
+            tag.className = 'tag';
+            tag.innerHTML = `${option.value} <span class="remove-tag" onclick="removeSkill(this, '${option.value}')">&times;</span>`;
+            selectedSkills.appendChild(tag);
+        }
+        toggleDropdownSkills();
     }
 
     function removeJobTopic(element, value) {
@@ -185,16 +230,39 @@
         tag.remove();
     }
 
+    function removeSkill(element, value) {
+        const skillsInput = document.getElementById('skills');
+        let selectedValues = skillsInput.value ? skillsInput.value.split(', ') : [];
+        selectedValues = selectedValues.filter(v => v !== value);
+        skillsInput.value = selectedValues.join(', ');
+
+        const tag = element.parentElement;
+        tag.remove();
+    }
+
     function validateForm() {
         const jobTopicsInput = document.getElementById('jobTopics');
         const jobTopicsError = document.getElementById('jobTopicsError');
+        const skillsInput = document.getElementById('skills');
+        const skillsError = document.getElementById('skillsError');
+
+        let isValid = true;
+
         if (!jobTopicsInput.value) {
             jobTopicsError.style.display = 'block';
-            return false;
+            isValid = false;
         } else {
             jobTopicsError.style.display = 'none';
         }
-        return true;
+
+        if (!skillsInput.value) {
+            skillsError.style.display = 'block';
+            isValid = false;
+        } else {
+            skillsError.style.display = 'none';
+        }
+
+        return isValid;
     }
 
     document.addEventListener('click', function(event) {

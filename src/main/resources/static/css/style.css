@@ -330,6 +330,7 @@ header {
     z-index: 999; /* Ustawienie z-index na wysoką wartość, aby przycisk był na wierzchu */
     background-color: #7e6dd7;
     color: #fff;
+
     padding: 10px 20px;
     border: none;
     border-radius: 5px;

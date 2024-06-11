@@ -3,7 +3,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+
+
 }
+
+
 header {
     background-color: #333;
     color: #fff;
@@ -191,20 +195,10 @@ header {
     /* opacity: 0.9; */
 
 }
-.container_who1 {
-    width: 87%;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    overflow: hidden;
-    height: 457px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
-
-}
 .container_who2 {
     width: 90%;
-    padding: 25px;
+    padding: 20px;
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
@@ -213,16 +207,37 @@ header {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.section-title11 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #3309c9;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 90%;
+}
+.container_who1 {
+    width: 100%;
+    padding: 20px; /* Zwiększono wartość padding, aby dodać odstęp od krawędzi */
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 457px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
 .section-title1 {
     text-align: center;
     margin-bottom: 20px;
     background-color: #3309c9;
     color: #fff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
-
 .text_in_main {
     width: 70%;
     background-color:  #ffffff;
@@ -397,6 +412,7 @@ header {
     border-radius: 5px; /* Zaokrąglenie rogów */
     cursor: pointer; /* Zmień kształt kursora na wskaźnik */
     font-size: 16px; /* Rozmiar czcionki */
+    margin-bottom: 20px; /* Dodanie odstępu od kontenera pod przyciskiem */
 }
 
 /* Styl przy najechaniu na przycisk */
@@ -466,7 +482,7 @@ header {
     border-radius: 5px; /* Zaokrąglenie rogów */
     text-decoration: none; /* Usunięcie podkreślenia */
     font-size: 14px; /* Rozmiar tekstu */
-    width: 160px; /* Stała szerokość przycisku */
+    width: 130px; /* Stała szerokość przycisku */
     text-align: center; /* Wyśrodkowanie tekstu */
     display: inline-block; /* Ustawienie jako element inline-block */
     cursor: pointer;

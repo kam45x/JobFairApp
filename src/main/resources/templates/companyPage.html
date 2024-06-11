@@ -6,6 +6,17 @@
     <title th:text="${page_company.name}"></title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://pl.fotoomnia.com/thumbnails/720/e58a709098b1960d2bd0e472731697b6.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            height: 100vh;
+
+        }
         .home-button {
             position: fixed;
             top: 20px;
@@ -59,7 +70,7 @@
     <div class="background" th:style="'background-image: url(' + ${page_company.imgUrl} + ');'"></div>
     </div>
 <div class="rest_page_cointainer">
-    <h2 class="section-title1" th:text="'Dlaczego ' + ${page_company.name} + '?'"></h2>
+    <h2 class="section-title11" th:text="'Dlaczego ' + ${page_company.name} + '?'"></h2>
     <div class="container_who2">
         <div class="text_in_main" th:text="${page_company.longDescription}"></div>
 

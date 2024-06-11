@@ -336,6 +336,11 @@ header {
     cursor: pointer;
 }
 
+#floatingButton:hover{
+    background-color: #8777d7;
+}
+
+
 .content {
     padding-bottom: 60px; /* Ustal odpowiedni margines dolny dla zawartości, aby uniknąć zakrycia przez przycisk */
 }
@@ -451,3 +456,22 @@ header {
 #favoritesContainer button:hover {
     background-color: #ff1a1a;
 }
+
+#newbutton1, #newbutton2 {
+    background-color: #7e6dd7; /* Jasny fioletowy kolor tła */
+    color: white; /* Biały kolor tekstu */
+    border: none; /* Usunięcie obramowania */
+    padding: 8px 16px; /* Dodanie wewnętrznego marginesu */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    text-decoration: none; /* Usunięcie podkreślenia */
+    font-size: 14px; /* Rozmiar tekstu */
+    width: 160px; /* Stała szerokość przycisku */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    display: inline-block; /* Ustawienie jako element inline-block */
+    cursor: pointer;
+}
+
+#newbutton1:hover, #newbutton2:hover {
+    background-color: #8777d7;
+}
+

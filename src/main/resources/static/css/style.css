@@ -203,7 +203,7 @@ header {
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
-    height: 500px;
+    height: 425px;
     overflow-wrap: break-word;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -224,7 +224,7 @@ header {
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
-    height: 638px;
+    height: 390px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 

@@ -80,6 +80,7 @@ header {
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
+
 .btn:hover {
     background-color: #555;
 }
@@ -223,7 +224,7 @@ header {
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
-    height: 457px;
+    height: 658px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 

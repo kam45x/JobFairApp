@@ -224,7 +224,7 @@ header {
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
-    height: 658px;
+    height: 638px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -251,8 +251,8 @@ header {
     padding: 0; /* Wewnętrzny odstęp dla zawartości (opcjonalny) */
     background-color: #ffffff; /* Kolor tła kontenera */
     position: absolute;
-    top: 600px;
-    left: 250px;
+    top: 80%;
+    left: 45%;
 
 }
 
@@ -282,7 +282,7 @@ header {
     position: relative;
     width: 90%;
     padding: 50px;
-    margin-right: 10%;
+    margin-right: 20%;
     height: 1000px;
 
 
@@ -295,6 +295,7 @@ header {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
 .btn1 {
@@ -320,8 +321,8 @@ header {
 
 .workshop {
     position:relative;
-    width: 100%;
-    padding: 0;
+    width: 99%;
+    padding: 10px;
     margin-right: 10%;
     font-size: 13px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -330,7 +331,7 @@ header {
 
 .container_plan {
     width: 100%;
-    padding: 25px;
+    padding: 10px;
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
@@ -435,8 +436,8 @@ header {
 
 #favoritesContainer {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 80px;
+    left: 20px;
     width: 300px;
     max-height: 400px;
     background-color: white;
@@ -475,7 +476,7 @@ header {
     background-color: #ff1a1a;
 }
 
-#newbutton1, #newbutton2 {
+#newbutton1, #newbutton2, #newbutton3 , #newbutton4{
     background-color: #7e6dd7; /* Jasny fioletowy kolor tła */
     color: white; /* Biały kolor tekstu */
     border: none; /* Usunięcie obramowania */
@@ -488,8 +489,24 @@ header {
     display: inline-block; /* Ustawienie jako element inline-block */
     cursor: pointer;
 }
+#newbutton4{
+    background-color: #7e6dd7; /* Jasny fioletowy kolor tła */
+    color: white; /* Biały kolor tekstu */
+    border: none; /* Usunięcie obramowania */
+    padding: 8px 16px; /* Dodanie wewnętrznego marginesu */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    text-decoration: none; /* Usunięcie podkreślenia */
+    font-size: 14px; /* Rozmiar tekstu */
+    width: 130px; /* Stała szerokość przycisku */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    display: inline-block; /* Ustawienie jako element inline-block */
+    cursor: pointer;
+    position: fixed;
+    top: 40px;
+    left: 20px;
+    z-index: 999; /* Ustawienie z-index na wysoką wartość, aby przycisk był na wierzchu */}
 
-#newbutton1:hover, #newbutton2:hover {
+#newbutton1:hover, #newbutton2:hover , #newbutton3:hover, #newbutton4:hover, #newbutton5:hover{
     background-color: #8777d7;
 }
 

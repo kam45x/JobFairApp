@@ -42,7 +42,7 @@ public class AdminController {
 
         companyRepository.delete(company);
 
-        booth.setCompanyName("Puste stoisko");
+        booth.setCompanyName("-");
         booth.setColor("#ddd");
         boothRepository.save(booth);
         return "redirect:/adminView";

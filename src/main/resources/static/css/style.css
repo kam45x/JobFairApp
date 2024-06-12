@@ -3,7 +3,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+
+
 }
+
+
 header {
     background-color: #333;
     color: #fff;
@@ -76,6 +80,7 @@ header {
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
+
 .btn:hover {
     background-color: #555;
 }
@@ -91,21 +96,27 @@ header {
     grid-column: span 5;
 }
 .booth {
-    background-color: #ddd; /* zmieniony kolor stoiska na szary */
+    background-color: #ddd;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: flex; /* Ustawienie kontenera na flexbox */
+    justify-content: center; /* Wyśrodkowanie zawartości wzdłuż osi X */
+    align-items: center; /* Wyśrodkowanie zawartości wzdłuż osi Y */
+    text-align: center; /* Dodanie wyśrodkowania tekstu */
 }
+
 .booth:hover {
     background-color: #ccc; /* zmieniony kolor podczas najechania na stoisko */
 }
+
 .booth:hover::before {
     content: attr(data-tooltip);
     position: absolute;
-    top: -30px;
+    top: -30px; /* Przesunięcie do góry o 30px */
     left: 50%;
     transform: translateX(-50%);
     padding: 5px;
@@ -115,6 +126,24 @@ header {
     font-size: 12px;
     white-space: nowrap;
 }
+
+/*.booth:hover::before {*/
+/*    content: attr(data-tooltip);*/
+/*    position: absolute;*/
+/*    top: 50%; !* Ustawienie górnego marginesu na 50% *!*/
+/*    left: 50%;*/
+/*    padding: 5px;*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    border-radius: 5px;*/
+/*    font-size: 12px;*/
+/*    white-space: nowrap;*/
+/*    transform: translateX(-50%);*/
+/*    !* Ustawienie marginesu górnego na - połowę wysokości tooltipu *!*/
+/*    margin-top: -12px; !* Połowa wysokości tooltipu (12px) *!*/
+/*}*/
+
+
 
 
 .section-title {
@@ -167,38 +196,49 @@ header {
     /* opacity: 0.9; */
 
 }
-.container_who1 {
-    width: 87%;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    overflow: hidden;
-    height: 457px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
-
-}
 .container_who2 {
     width: 90%;
-    padding: 25px;
+    padding: 20px;
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
-    height: 500px;
+    height: 425px;
     overflow-wrap: break-word;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+.section-title11 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #3309c9;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 90%;
+}
+.container_who1 {
+    width: 100%;
+    padding: 20px; /* Zwiększono wartość padding, aby dodać odstęp od krawędzi */
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 390px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
 
 .section-title1 {
     text-align: center;
     margin-bottom: 20px;
     background-color: #3309c9;
     color: #fff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
-
 .text_in_main {
     width: 70%;
     background-color:  #ffffff;
@@ -211,8 +251,8 @@ header {
     padding: 0; /* Wewnętrzny odstęp dla zawartości (opcjonalny) */
     background-color: #ffffff; /* Kolor tła kontenera */
     position: absolute;
-    top: 600px;
-    left: 250px;
+    top: 80%;
+    left: 45%;
 
 }
 
@@ -242,7 +282,7 @@ header {
     position: relative;
     width: 90%;
     padding: 50px;
-    margin-right: 10%;
+    margin-right: 20%;
     height: 1000px;
 
 
@@ -255,6 +295,7 @@ header {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
 .btn1 {
@@ -280,8 +321,8 @@ header {
 
 .workshop {
     position:relative;
-    width: 100%;
-    padding: 0;
+    width: 99%;
+    padding: 10px;
     margin-right: 10%;
     font-size: 13px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -290,7 +331,7 @@ header {
 
 .container_plan {
     width: 100%;
-    padding: 25px;
+    padding: 10px;
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
@@ -306,11 +347,17 @@ header {
     z-index: 999; /* Ustawienie z-index na wysoką wartość, aby przycisk był na wierzchu */
     background-color: #7e6dd7;
     color: #fff;
+
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
+#floatingButton:hover{
+    background-color: #8777d7;
+}
+
 
 .content {
     padding-bottom: 60px; /* Ustal odpowiedni margines dolny dla zawartości, aby uniknąć zakrycia przez przycisk */
@@ -367,6 +414,7 @@ header {
     border-radius: 5px; /* Zaokrąglenie rogów */
     cursor: pointer; /* Zmień kształt kursora na wskaźnik */
     font-size: 16px; /* Rozmiar czcionki */
+    margin-bottom: 20px; /* Dodanie odstępu od kontenera pod przyciskiem */
 }
 
 /* Styl przy najechaniu na przycisk */
@@ -388,8 +436,8 @@ header {
 
 #favoritesContainer {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 80px;
+    left: 20px;
     width: 300px;
     max-height: 400px;
     background-color: white;
@@ -427,3 +475,38 @@ header {
 #favoritesContainer button:hover {
     background-color: #ff1a1a;
 }
+
+#newbutton1, #newbutton2, #newbutton3 , #newbutton4{
+    background-color: #7e6dd7; /* Jasny fioletowy kolor tła */
+    color: white; /* Biały kolor tekstu */
+    border: none; /* Usunięcie obramowania */
+    padding: 8px 16px; /* Dodanie wewnętrznego marginesu */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    text-decoration: none; /* Usunięcie podkreślenia */
+    font-size: 14px; /* Rozmiar tekstu */
+    width: 130px; /* Stała szerokość przycisku */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    display: inline-block; /* Ustawienie jako element inline-block */
+    cursor: pointer;
+}
+#newbutton4{
+    background-color: #7e6dd7; /* Jasny fioletowy kolor tła */
+    color: white; /* Biały kolor tekstu */
+    border: none; /* Usunięcie obramowania */
+    padding: 8px 16px; /* Dodanie wewnętrznego marginesu */
+    border-radius: 5px; /* Zaokrąglenie rogów */
+    text-decoration: none; /* Usunięcie podkreślenia */
+    font-size: 14px; /* Rozmiar tekstu */
+    width: 130px; /* Stała szerokość przycisku */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    display: inline-block; /* Ustawienie jako element inline-block */
+    cursor: pointer;
+    position: fixed;
+    top: 40px;
+    left: 20px;
+    z-index: 999; /* Ustawienie z-index na wysoką wartość, aby przycisk był na wierzchu */}
+
+#newbutton1:hover, #newbutton2:hover , #newbutton3:hover, #newbutton4:hover, #newbutton5:hover{
+    background-color: #8777d7;
+}
+

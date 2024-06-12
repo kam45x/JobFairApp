@@ -22,6 +22,9 @@ Z06
 ## Trzeci etap projektu - działająca aplikacja
 [Dokumentacja III etapu](docs/III_etap.md)
 
+## Czwarty etap projektu - poprawki
+[Dokumentacja IV etapu](docs/IV_etap.md)
+
 ## Dokumentacja - inne
 [Tworzenia bazy danych PostgreSQL](docs/BazaDanych.md)
 
